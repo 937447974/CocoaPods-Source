@@ -1,0 +1,1466 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		0A39D4C81F13896F00FAF835 /* pod */ = {isa = PBXFileReference; lastKnownFileType = text; path = pod; sourceTree = "<group>"; };
+		0A39D4C91F13896F00FAF835 /* sandbox-pod */ = {isa = PBXFileReference; lastKnownFileType = text; path = "sandbox-pod"; sourceTree = "<group>"; };
+		0A39D4CA1F13896F00FAF835 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		0A39D4CF1F13896F00FAF835 /* clean.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = clean.rb; sourceTree = "<group>"; };
+		0A39D4D01F13896F00FAF835 /* list.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = list.rb; sourceTree = "<group>"; };
+		0A39D4D11F13896F00FAF835 /* cache.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = cache.rb; sourceTree = "<group>"; };
+		0A39D4D21F13896F00FAF835 /* env.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = env.rb; sourceTree = "<group>"; };
+		0A39D4D31F13896F00FAF835 /* init.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = init.rb; sourceTree = "<group>"; };
+		0A39D4D41F13896F00FAF835 /* install.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = install.rb; sourceTree = "<group>"; };
+		0A39D4D61F13896F00FAF835 /* list.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = list.rb; sourceTree = "<group>"; };
+		0A39D4D71F13896F00FAF835 /* podfile.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = podfile.rb; sourceTree = "<group>"; };
+		0A39D4D81F13896F00FAF835 /* repl.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = repl.rb; sourceTree = "<group>"; };
+		0A39D4D91F13896F00FAF835 /* spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = spec.rb; sourceTree = "<group>"; };
+		0A39D4DA1F13896F00FAF835 /* update_search_index.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = update_search_index.rb; sourceTree = "<group>"; };
+		0A39D4DB1F13896F00FAF835 /* ipc.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = ipc.rb; sourceTree = "<group>"; };
+		0A39D4DD1F13896F00FAF835 /* create.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = create.rb; sourceTree = "<group>"; };
+		0A39D4DE1F13896F00FAF835 /* lint.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = lint.rb; sourceTree = "<group>"; };
+		0A39D4DF1F13896F00FAF835 /* lib.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = lib.rb; sourceTree = "<group>"; };
+		0A39D4E01F13896F00FAF835 /* list.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = list.rb; sourceTree = "<group>"; };
+		0A39D4E21F13896F00FAF835 /* project_directory.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = project_directory.rb; sourceTree = "<group>"; };
+		0A39D4E31F13896F00FAF835 /* repo_update.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = repo_update.rb; sourceTree = "<group>"; };
+		0A39D4E41F13896F00FAF835 /* outdated.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = outdated.rb; sourceTree = "<group>"; };
+		0A39D4E61F13896F00FAF835 /* add.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = add.rb; sourceTree = "<group>"; };
+		0A39D4E71F13896F00FAF835 /* lint.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = lint.rb; sourceTree = "<group>"; };
+		0A39D4E81F13896F00FAF835 /* list.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = list.rb; sourceTree = "<group>"; };
+		0A39D4E91F13896F00FAF835 /* push.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = push.rb; sourceTree = "<group>"; };
+		0A39D4EA1F13896F00FAF835 /* remove.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = remove.rb; sourceTree = "<group>"; };
+		0A39D4EB1F13896F00FAF835 /* update.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = update.rb; sourceTree = "<group>"; };
+		0A39D4EC1F13896F00FAF835 /* repo.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = repo.rb; sourceTree = "<group>"; };
+		0A39D4ED1F13896F00FAF835 /* setup.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = setup.rb; sourceTree = "<group>"; };
+		0A39D4EF1F13896F00FAF835 /* cat.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = cat.rb; sourceTree = "<group>"; };
+		0A39D4F01F13896F00FAF835 /* create.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = create.rb; sourceTree = "<group>"; };
+		0A39D4F11F13896F00FAF835 /* edit.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = edit.rb; sourceTree = "<group>"; };
+		0A39D4F21F13896F00FAF835 /* env_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = env_spec.rb; sourceTree = "<group>"; };
+		0A39D4F31F13896F00FAF835 /* lint.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = lint.rb; sourceTree = "<group>"; };
+		0A39D4F41F13896F00FAF835 /* which.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = which.rb; sourceTree = "<group>"; };
+		0A39D4F51F13896F00FAF835 /* spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = spec.rb; sourceTree = "<group>"; };
+		0A39D4F61F13896F00FAF835 /* update.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = update.rb; sourceTree = "<group>"; };
+		0A39D4F71F13896F00FAF835 /* command.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = command.rb; sourceTree = "<group>"; };
+		0A39D4F81F13896F00FAF835 /* config.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = config.rb; sourceTree = "<group>"; };
+		0A39D4F91F13896F00FAF835 /* core_overrides.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = core_overrides.rb; sourceTree = "<group>"; };
+		0A39D4FB1F13896F00FAF835 /* cache.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = cache.rb; sourceTree = "<group>"; };
+		0A39D4FC1F13896F00FAF835 /* request.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = request.rb; sourceTree = "<group>"; };
+		0A39D4FD1F13896F00FAF835 /* response.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = response.rb; sourceTree = "<group>"; };
+		0A39D4FE1F13896F00FAF835 /* downloader.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = downloader.rb; sourceTree = "<group>"; };
+		0A39D4FF1F13896F00FAF835 /* executable.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = executable.rb; sourceTree = "<group>"; };
+		0A39D5011F13896F00FAF835 /* abstract_external_source.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = abstract_external_source.rb; sourceTree = "<group>"; };
+		0A39D5021F13896F00FAF835 /* downloader_source.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = downloader_source.rb; sourceTree = "<group>"; };
+		0A39D5031F13896F00FAF835 /* path_source.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = path_source.rb; sourceTree = "<group>"; };
+		0A39D5041F13896F00FAF835 /* podspec_source.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = podspec_source.rb; sourceTree = "<group>"; };
+		0A39D5051F13896F00FAF835 /* external_sources.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = external_sources.rb; sourceTree = "<group>"; };
+		0A39D5061F13896F00FAF835 /* gem_version.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = gem_version.rb; sourceTree = "<group>"; };
+		0A39D5091F13896F00FAF835 /* markdown.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = markdown.rb; sourceTree = "<group>"; };
+		0A39D50A1F13896F00FAF835 /* plist.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = plist.rb; sourceTree = "<group>"; };
+		0A39D50B1F13896F00FAF835 /* acknowledgements.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = acknowledgements.rb; sourceTree = "<group>"; };
+		0A39D50C1F13896F00FAF835 /* bridge_support.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = bridge_support.rb; sourceTree = "<group>"; };
+		0A39D50D1F13896F00FAF835 /* copy_resources_script.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = copy_resources_script.rb; sourceTree = "<group>"; };
+		0A39D50E1F13896F00FAF835 /* dummy_source.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = dummy_source.rb; sourceTree = "<group>"; };
+		0A39D50F1F13896F00FAF835 /* embed_frameworks_script.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = embed_frameworks_script.rb; sourceTree = "<group>"; };
+		0A39D5101F13896F00FAF835 /* header.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = header.rb; sourceTree = "<group>"; };
+		0A39D5111F13896F00FAF835 /* info_plist_file.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = info_plist_file.rb; sourceTree = "<group>"; };
+		0A39D5121F13896F00FAF835 /* module_map.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = module_map.rb; sourceTree = "<group>"; };
+		0A39D5131F13896F00FAF835 /* prefix_header.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = prefix_header.rb; sourceTree = "<group>"; };
+		0A39D5141F13896F00FAF835 /* umbrella_header.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = umbrella_header.rb; sourceTree = "<group>"; };
+		0A39D5161F13896F00FAF835 /* aggregate_xcconfig.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = aggregate_xcconfig.rb; sourceTree = "<group>"; };
+		0A39D5171F13896F00FAF835 /* pod_xcconfig.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = pod_xcconfig.rb; sourceTree = "<group>"; };
+		0A39D5181F13896F00FAF835 /* xcconfig_helper.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = xcconfig_helper.rb; sourceTree = "<group>"; };
+		0A39D5191F13896F00FAF835 /* xcconfig.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = xcconfig.rb; sourceTree = "<group>"; };
+		0A39D51A1F13896F00FAF835 /* hooks_manager.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = hooks_manager.rb; sourceTree = "<group>"; };
+		0A39D51D1F13896F00FAF835 /* analysis_result.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = analysis_result.rb; sourceTree = "<group>"; };
+		0A39D51E1F13896F00FAF835 /* locking_dependency_analyzer.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = locking_dependency_analyzer.rb; sourceTree = "<group>"; };
+		0A39D51F1F13896F00FAF835 /* pod_variant.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = pod_variant.rb; sourceTree = "<group>"; };
+		0A39D5201F13896F00FAF835 /* pod_variant_set.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = pod_variant_set.rb; sourceTree = "<group>"; };
+		0A39D5211F13896F00FAF835 /* sandbox_analyzer.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = sandbox_analyzer.rb; sourceTree = "<group>"; };
+		0A39D5221F13896F00FAF835 /* specs_state.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = specs_state.rb; sourceTree = "<group>"; };
+		0A39D5231F13896F00FAF835 /* target_inspection_result.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = target_inspection_result.rb; sourceTree = "<group>"; };
+		0A39D5241F13896F00FAF835 /* target_inspector.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = target_inspector.rb; sourceTree = "<group>"; };
+		0A39D5251F13896F00FAF835 /* analyzer.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = analyzer.rb; sourceTree = "<group>"; };
+		0A39D5261F13896F00FAF835 /* installation_options.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = installation_options.rb; sourceTree = "<group>"; };
+		0A39D5271F13896F00FAF835 /* pod_source_installer.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = pod_source_installer.rb; sourceTree = "<group>"; };
+		0A39D5281F13896F00FAF835 /* pod_source_preparer.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = pod_source_preparer.rb; sourceTree = "<group>"; };
+		0A39D5291F13896F00FAF835 /* podfile_validator.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = podfile_validator.rb; sourceTree = "<group>"; };
+		0A39D52A1F13896F00FAF835 /* post_install_hooks_context.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = post_install_hooks_context.rb; sourceTree = "<group>"; };
+		0A39D52B1F13896F00FAF835 /* pre_install_hooks_context.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = pre_install_hooks_context.rb; sourceTree = "<group>"; };
+		0A39D52C1F13896F00FAF835 /* source_provider_hooks_context.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = source_provider_hooks_context.rb; sourceTree = "<group>"; };
+		0A39D52F1F13896F00FAF835 /* xcconfig_integrator.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = xcconfig_integrator.rb; sourceTree = "<group>"; };
+		0A39D5301F13896F00FAF835 /* target_integrator.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = target_integrator.rb; sourceTree = "<group>"; };
+		0A39D5311F13896F00FAF835 /* user_project_integrator.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = user_project_integrator.rb; sourceTree = "<group>"; };
+		0A39D5341F13896F00FAF835 /* aggregate_target_installer.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = aggregate_target_installer.rb; sourceTree = "<group>"; };
+		0A39D5351F13896F00FAF835 /* file_references_installer.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = file_references_installer.rb; sourceTree = "<group>"; };
+		0A39D5361F13896F00FAF835 /* pod_target_installer.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = pod_target_installer.rb; sourceTree = "<group>"; };
+		0A39D5371F13896F00FAF835 /* target_installer.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = target_installer.rb; sourceTree = "<group>"; };
+		0A39D5381F13896F00FAF835 /* pods_project_generator.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = pods_project_generator.rb; sourceTree = "<group>"; };
+		0A39D5391F13896F00FAF835 /* xcode.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = xcode.rb; sourceTree = "<group>"; };
+		0A39D53A1F13896F00FAF835 /* installer.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = installer.rb; sourceTree = "<group>"; };
+		0A39D53B1F13896F00FAF835 /* open-uri.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = "open-uri.rb"; sourceTree = "<group>"; };
+		0A39D53C1F13896F00FAF835 /* project.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = project.rb; sourceTree = "<group>"; };
+		0A39D53E1F13896F00FAF835 /* lazy_specification.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = lazy_specification.rb; sourceTree = "<group>"; };
+		0A39D53F1F13896F00FAF835 /* resolver.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = resolver.rb; sourceTree = "<group>"; };
+		0A39D5411F13896F00FAF835 /* file_accessor.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = file_accessor.rb; sourceTree = "<group>"; };
+		0A39D5421F13896F00FAF835 /* headers_store.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = headers_store.rb; sourceTree = "<group>"; };
+		0A39D5431F13896F00FAF835 /* path_list.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = path_list.rb; sourceTree = "<group>"; };
+		0A39D5441F13896F00FAF835 /* pod_dir_cleaner.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = pod_dir_cleaner.rb; sourceTree = "<group>"; };
+		0A39D5451F13896F00FAF835 /* podspec_finder.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = podspec_finder.rb; sourceTree = "<group>"; };
+		0A39D5461F13896F00FAF835 /* sandbox.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = sandbox.rb; sourceTree = "<group>"; };
+		0A39D5471F13896F00FAF835 /* sources_manager.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = sources_manager.rb; sourceTree = "<group>"; };
+		0A39D5491F13896F00FAF835 /* aggregate_target.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = aggregate_target.rb; sourceTree = "<group>"; };
+		0A39D54A1F13896F00FAF835 /* pod_target.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = pod_target.rb; sourceTree = "<group>"; };
+		0A39D54B1F13896F00FAF835 /* target.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = target.rb; sourceTree = "<group>"; };
+		0A39D54D1F13896F00FAF835 /* error_report.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = error_report.rb; sourceTree = "<group>"; };
+		0A39D54E1F13896F00FAF835 /* inspector_reporter.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = inspector_reporter.rb; sourceTree = "<group>"; };
+		0A39D54F1F13896F00FAF835 /* user_interface.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = user_interface.rb; sourceTree = "<group>"; };
+		0A39D5501F13896F00FAF835 /* validator.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = validator.rb; sourceTree = "<group>"; };
+		0A39D5511F13896F00FAF835 /* cocoapods.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = cocoapods.rb; sourceTree = "<group>"; };
+		0A39D5521F13896F00FAF835 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		0A39D5531F13896F00FAF835 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		0A39D5571F13896F00FAF835 /* core_ui.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = core_ui.rb; sourceTree = "<group>"; };
+		0A39D5581F13896F00FAF835 /* dependency.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = dependency.rb; sourceTree = "<group>"; };
+		0A39D5591F13896F00FAF835 /* gem_version.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = gem_version.rb; sourceTree = "<group>"; };
+		0A39D55A1F13896F00FAF835 /* github.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = github.rb; sourceTree = "<group>"; };
+		0A39D55B1F13896F00FAF835 /* http.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = http.rb; sourceTree = "<group>"; };
+		0A39D55C1F13896F00FAF835 /* lockfile.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = lockfile.rb; sourceTree = "<group>"; };
+		0A39D55D1F13896F00FAF835 /* master_source.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = master_source.rb; sourceTree = "<group>"; };
+		0A39D55E1F13896F00FAF835 /* metrics.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = metrics.rb; sourceTree = "<group>"; };
+		0A39D55F1F13896F00FAF835 /* platform.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = platform.rb; sourceTree = "<group>"; };
+		0A39D5611F13896F00FAF835 /* dsl.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = dsl.rb; sourceTree = "<group>"; };
+		0A39D5621F13896F00FAF835 /* target_definition.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = target_definition.rb; sourceTree = "<group>"; };
+		0A39D5631F13896F00FAF835 /* podfile.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = podfile.rb; sourceTree = "<group>"; };
+		0A39D5641F13896F00FAF835 /* requirement.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = requirement.rb; sourceTree = "<group>"; };
+		0A39D5661F13896F00FAF835 /* acceptor.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = acceptor.rb; sourceTree = "<group>"; };
+		0A39D5671F13896F00FAF835 /* aggregate.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = aggregate.rb; sourceTree = "<group>"; };
+		0A39D5681F13896F00FAF835 /* health_reporter.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = health_reporter.rb; sourceTree = "<group>"; };
+		0A39D5691F13896F00FAF835 /* manager.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = manager.rb; sourceTree = "<group>"; };
+		0A39D56A1F13896F00FAF835 /* metadata.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = metadata.rb; sourceTree = "<group>"; };
+		0A39D56B1F13896F00FAF835 /* source.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = source.rb; sourceTree = "<group>"; };
+		0A39D56D1F13896F00FAF835 /* consumer.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = consumer.rb; sourceTree = "<group>"; };
+		0A39D56F1F13896F00FAF835 /* attribute.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = attribute.rb; sourceTree = "<group>"; };
+		0A39D5701F13896F00FAF835 /* attribute_support.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = attribute_support.rb; sourceTree = "<group>"; };
+		0A39D5711F13896F00FAF835 /* deprecations.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = deprecations.rb; sourceTree = "<group>"; };
+		0A39D5721F13896F00FAF835 /* platform_proxy.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = platform_proxy.rb; sourceTree = "<group>"; };
+		0A39D5731F13896F00FAF835 /* dsl.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = dsl.rb; sourceTree = "<group>"; };
+		0A39D5741F13896F00FAF835 /* json.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = json.rb; sourceTree = "<group>"; };
+		0A39D5761F13896F00FAF835 /* analyzer.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = analyzer.rb; sourceTree = "<group>"; };
+		0A39D5771F13896F00FAF835 /* result.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = result.rb; sourceTree = "<group>"; };
+		0A39D5781F13896F00FAF835 /* linter.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = linter.rb; sourceTree = "<group>"; };
+		0A39D5791F13896F00FAF835 /* root_attribute_accessors.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = root_attribute_accessors.rb; sourceTree = "<group>"; };
+		0A39D57B1F13896F00FAF835 /* presenter.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = presenter.rb; sourceTree = "<group>"; };
+		0A39D57C1F13896F00FAF835 /* set.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = set.rb; sourceTree = "<group>"; };
+		0A39D57D1F13896F00FAF835 /* specification.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = specification.rb; sourceTree = "<group>"; };
+		0A39D57E1F13896F00FAF835 /* standard_error.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = standard_error.rb; sourceTree = "<group>"; };
+		0A39D5801F13896F00FAF835 /* requirement.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = requirement.rb; sourceTree = "<group>"; };
+		0A39D5811F13896F00FAF835 /* version.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = version.rb; sourceTree = "<group>"; };
+		0A39D5821F13896F00FAF835 /* vendor.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = vendor.rb; sourceTree = "<group>"; };
+		0A39D5831F13896F00FAF835 /* version.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = version.rb; sourceTree = "<group>"; };
+		0A39D5841F13896F00FAF835 /* yaml_helper.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = yaml_helper.rb; sourceTree = "<group>"; };
+		0A39D5851F13896F00FAF835 /* cocoapods-core.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = "cocoapods-core.rb"; sourceTree = "<group>"; };
+		0A39D5861F13896F00FAF835 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		0A39D5871F13896F00FAF835 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		0A39D58C1F13896F00FAF835 /* deintegrate.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = deintegrate.rb; sourceTree = "<group>"; };
+		0A39D58E1F13896F00FAF835 /* gem_version.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = gem_version.rb; sourceTree = "<group>"; };
+		0A39D58F1F13896F00FAF835 /* deintegrator.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = deintegrator.rb; sourceTree = "<group>"; };
+		0A39D5901F13896F00FAF835 /* cocoapods_deintegrate.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = cocoapods_deintegrate.rb; sourceTree = "<group>"; };
+		0A39D5911F13896F00FAF835 /* cocoapods_plugin.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = cocoapods_plugin.rb; sourceTree = "<group>"; };
+		0A39D5921F13896F00FAF835 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		0A39D5931F13896F00FAF835 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		0A39D5971F13896F00FAF835 /* api.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = api.rb; sourceTree = "<group>"; };
+		0A39D5981F13896F00FAF835 /* api_exposable.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = api_exposable.rb; sourceTree = "<group>"; };
+		0A39D5991F13896F00FAF835 /* base.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = base.rb; sourceTree = "<group>"; };
+		0A39D59A1F13896F00FAF835 /* bazaar.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = bazaar.rb; sourceTree = "<group>"; };
+		0A39D59B1F13896F00FAF835 /* gem_version.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = gem_version.rb; sourceTree = "<group>"; };
+		0A39D59C1F13896F00FAF835 /* git.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = git.rb; sourceTree = "<group>"; };
+		0A39D59D1F13896F00FAF835 /* http.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = http.rb; sourceTree = "<group>"; };
+		0A39D59E1F13896F00FAF835 /* mercurial.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = mercurial.rb; sourceTree = "<group>"; };
+		0A39D59F1F13896F00FAF835 /* subversion.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = subversion.rb; sourceTree = "<group>"; };
+		0A39D5A01F13896F00FAF835 /* cocoapods-downloader.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = "cocoapods-downloader.rb"; sourceTree = "<group>"; };
+		0A39D5A11F13896F00FAF835 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		0A39D5A21F13896F00FAF835 /* README.markdown */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.markdown; sourceTree = "<group>"; };
+		0A39D5A41F13896F00FAF835 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		0A39D5A51F13896F00FAF835 /* .rubocop.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .rubocop.yml; sourceTree = "<group>"; };
+		0A39D5A61F13896F00FAF835 /* .rubocop_cocoapods.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .rubocop_cocoapods.yml; sourceTree = "<group>"; };
+		0A39D5A71F13896F00FAF835 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
+		0A39D5A81F13896F00FAF835 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		0A39D5A91F13896F00FAF835 /* cocoapods-plugins.gemspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = "cocoapods-plugins.gemspec"; sourceTree = "<group>"; };
+		0A39D5AA1F13896F00FAF835 /* Gemfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Gemfile; sourceTree = "<group>"; };
+		0A39D5AB1F13896F00FAF835 /* Gemfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Gemfile.lock; sourceTree = "<group>"; };
+		0A39D5AD1F13896F00FAF835 /* cocoapods_plugin.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = cocoapods_plugin.rb; sourceTree = "<group>"; };
+		0A39D5AE1F13896F00FAF835 /* cocoapods_plugins.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = cocoapods_plugins.rb; sourceTree = "<group>"; };
+		0A39D5B11F13896F00FAF835 /* gem_helper.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = gem_helper.rb; sourceTree = "<group>"; };
+		0A39D5B21F13896F00FAF835 /* gem_index_cache.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = gem_index_cache.rb; sourceTree = "<group>"; };
+		0A39D5B41F13896F00FAF835 /* create.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = create.rb; sourceTree = "<group>"; };
+		0A39D5B51F13896F00FAF835 /* installed.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = installed.rb; sourceTree = "<group>"; };
+		0A39D5B61F13896F00FAF835 /* list.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = list.rb; sourceTree = "<group>"; };
+		0A39D5B71F13896F00FAF835 /* publish.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = publish.rb; sourceTree = "<group>"; };
+		0A39D5B81F13896F00FAF835 /* search.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = search.rb; sourceTree = "<group>"; };
+		0A39D5B91F13896F00FAF835 /* plugins.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = plugins.rb; sourceTree = "<group>"; };
+		0A39D5BA1F13896F00FAF835 /* plugins_helper.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = plugins_helper.rb; sourceTree = "<group>"; };
+		0A39D5BB1F13896F00FAF835 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		0A39D5BC1F13896F00FAF835 /* plugins.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = plugins.json; sourceTree = "<group>"; };
+		0A39D5BD1F13896F00FAF835 /* Rakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Rakefile; sourceTree = "<group>"; };
+		0A39D5BE1F13896F00FAF835 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		0A39D5C11F13896F00FAF835 /* gem_helper_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = gem_helper_spec.rb; sourceTree = "<group>"; };
+		0A39D5C21F13896F00FAF835 /* gem_index_cache_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = gem_index_cache_spec.rb; sourceTree = "<group>"; };
+		0A39D5C41F13896F00FAF835 /* create_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = create_spec.rb; sourceTree = "<group>"; };
+		0A39D5C51F13896F00FAF835 /* installed_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = installed_spec.rb; sourceTree = "<group>"; };
+		0A39D5C61F13896F00FAF835 /* list_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = list_spec.rb; sourceTree = "<group>"; };
+		0A39D5C71F13896F00FAF835 /* publish_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = publish_spec.rb; sourceTree = "<group>"; };
+		0A39D5C81F13896F00FAF835 /* search_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = search_spec.rb; sourceTree = "<group>"; };
+		0A39D5C91F13896F00FAF835 /* plugins_helper_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = plugins_helper_spec.rb; sourceTree = "<group>"; };
+		0A39D5CA1F13896F00FAF835 /* plugins_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = plugins_spec.rb; sourceTree = "<group>"; };
+		0A39D5CC1F13896F00FAF835 /* cocoapods-foo1.gemspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = "cocoapods-foo1.gemspec"; sourceTree = "<group>"; };
+		0A39D5CD1F13896F00FAF835 /* cocoapods-foo2.gemspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = "cocoapods-foo2.gemspec"; sourceTree = "<group>"; };
+		0A39D5CE1F13896F00FAF835 /* plugins.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = plugins.json; sourceTree = "<group>"; };
+		0A39D5CF1F13896F00FAF835 /* unprefixed.gemspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = unprefixed.gemspec; sourceTree = "<group>"; };
+		0A39D5D01F13896F00FAF835 /* spec_helper.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = spec_helper.rb; sourceTree = "<group>"; };
+		0A39D5D21F13896F00FAF835 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		0A39D5D31F13896F00FAF835 /* .gitmodules */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitmodules; sourceTree = "<group>"; };
+		0A39D5D41F13896F00FAF835 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
+		0A39D5D51F13896F00FAF835 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		0A39D5D61F13896F00FAF835 /* cocoapods-search.gemspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = "cocoapods-search.gemspec"; sourceTree = "<group>"; };
+		0A39D5D71F13896F00FAF835 /* Gemfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Gemfile; sourceTree = "<group>"; };
+		0A39D5D81F13896F00FAF835 /* Gemfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Gemfile.lock; sourceTree = "<group>"; };
+		0A39D5DC1F13896F00FAF835 /* search.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = search.rb; sourceTree = "<group>"; };
+		0A39D5DD1F13896F00FAF835 /* command.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = command.rb; sourceTree = "<group>"; };
+		0A39D5DE1F13896F00FAF835 /* gem_version.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = gem_version.rb; sourceTree = "<group>"; };
+		0A39D5DF1F13896F00FAF835 /* cocoapods-search.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = "cocoapods-search.rb"; sourceTree = "<group>"; };
+		0A39D5E01F13896F00FAF835 /* cocoapods_plugin.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = cocoapods_plugin.rb; sourceTree = "<group>"; };
+		0A39D5E11F13896F00FAF835 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		0A39D5E21F13896F00FAF835 /* Rakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Rakefile; sourceTree = "<group>"; };
+		0A39D5E31F13896F00FAF835 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		0A39D5E61F13896F00FAF835 /* search_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = search_spec.rb; sourceTree = "<group>"; };
+		0A39D5EC1F13896F00FAF835 /* BananaLib.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = BananaLib.podspec; sourceTree = "<group>"; };
+		0A39D5EF1F13896F00FAF835 /* JSONKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = JSONKit.podspec; sourceTree = "<group>"; };
+		0A39D5F11F13896F00FAF835 /* JSONKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = JSONKit.podspec; sourceTree = "<group>"; };
+		0A39D5F41F13896F00FAF835 /* monkey.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = monkey.podspec; sourceTree = "<group>"; };
+		0A39D5F71F13896F00FAF835 /* OrangeFramework.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = OrangeFramework.podspec; sourceTree = "<group>"; };
+		0A39D5FA1F13896F00FAF835 /* Pod+With+Plus+Signs.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Pod+With+Plus+Signs.podspec"; sourceTree = "<group>"; };
+		0A39D5FD1F13896F00FAF835 /* Realm.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Realm.podspec; sourceTree = "<group>"; };
+		0A39D5FF1F13896F00FAF835 /* command.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = command.rb; sourceTree = "<group>"; };
+		0A39D6001F13896F00FAF835 /* fixture.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = fixture.rb; sourceTree = "<group>"; };
+		0A39D6011F13896F00FAF835 /* pre_flight.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = pre_flight.rb; sourceTree = "<group>"; };
+		0A39D6021F13896F00FAF835 /* temporary_repos.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = temporary_repos.rb; sourceTree = "<group>"; };
+		0A39D6031F13896F00FAF835 /* user_interface.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = user_interface.rb; sourceTree = "<group>"; };
+		0A39D6041F13896F00FAF835 /* spec_helper.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = spec_helper.rb; sourceTree = "<group>"; };
+		0A39D6061F13896F00FAF835 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		0A39D6071F13896F00FAF835 /* .rubocop.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .rubocop.yml; sourceTree = "<group>"; };
+		0A39D6081F13896F00FAF835 /* .rubocop_cocoapods.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .rubocop_cocoapods.yml; sourceTree = "<group>"; };
+		0A39D6091F13896F00FAF835 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
+		0A39D60A1F13896F00FAF835 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		0A39D60B1F13896F00FAF835 /* cocoapods-stats.gemspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = "cocoapods-stats.gemspec"; sourceTree = "<group>"; };
+		0A39D60C1F13896F00FAF835 /* Gemfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Gemfile; sourceTree = "<group>"; };
+		0A39D60D1F13896F00FAF835 /* Gemfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Gemfile.lock; sourceTree = "<group>"; };
+		0A39D60F1F13896F00FAF835 /* cocoapods_plugin.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = cocoapods_plugin.rb; sourceTree = "<group>"; };
+		0A39D6111F13896F00FAF835 /* gem_version.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = gem_version.rb; sourceTree = "<group>"; };
+		0A39D6121F13896F00FAF835 /* sender.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = sender.rb; sourceTree = "<group>"; };
+		0A39D6131F13896F00FAF835 /* target_mapper.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = target_mapper.rb; sourceTree = "<group>"; };
+		0A39D6141F13896F00FAF835 /* cocoapods_stats.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = cocoapods_stats.rb; sourceTree = "<group>"; };
+		0A39D6151F13896F00FAF835 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		0A39D6161F13896F00FAF835 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		0A39D6171F13896F00FAF835 /* Rakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Rakefile; sourceTree = "<group>"; };
+		0A39D6181F13896F00FAF835 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		0A39D61A1F13896F00FAF835 /* env_validator_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = env_validator_spec.rb; sourceTree = "<group>"; };
+		0A39D61B1F13896F00FAF835 /* spec_helper.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = spec_helper.rb; sourceTree = "<group>"; };
+		0A39D61C1F13896F00FAF835 /* target_mapper_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = target_mapper_spec.rb; sourceTree = "<group>"; };
+		0A39D61D1F13896F00FAF835 /* validator_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = validator_spec.rb; sourceTree = "<group>"; };
+		0A39D61F1F13896F00FAF835 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		0A39D6201F13896F00FAF835 /* .kick */ = {isa = PBXFileReference; lastKnownFileType = text; path = .kick; sourceTree = "<group>"; };
+		0A39D6211F13896F00FAF835 /* .rubocop.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .rubocop.yml; sourceTree = "<group>"; };
+		0A39D6221F13896F00FAF835 /* .rubocop_cocoapods.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .rubocop_cocoapods.yml; sourceTree = "<group>"; };
+		0A39D6231F13896F00FAF835 /* .rubocop_todo.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .rubocop_todo.yml; sourceTree = "<group>"; };
+		0A39D6241F13896F00FAF835 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
+		0A39D6251F13896F00FAF835 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		0A39D6261F13896F00FAF835 /* cocoapods-trunk.gemspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = "cocoapods-trunk.gemspec"; sourceTree = "<group>"; };
+		0A39D6271F13896F00FAF835 /* Gemfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Gemfile; sourceTree = "<group>"; };
+		0A39D6281F13896F00FAF835 /* Gemfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Gemfile.lock; sourceTree = "<group>"; };
+		0A39D62A1F13896F00FAF835 /* cocoapods_plugin.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = cocoapods_plugin.rb; sourceTree = "<group>"; };
+		0A39D62B1F13896F00FAF835 /* cocoapods_trunk.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = cocoapods_trunk.rb; sourceTree = "<group>"; };
+		0A39D62F1F13896F00FAF835 /* add_owner.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = add_owner.rb; sourceTree = "<group>"; };
+		0A39D6301F13896F00FAF835 /* delete.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = delete.rb; sourceTree = "<group>"; };
+		0A39D6311F13896F00FAF835 /* deprecate.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = deprecate.rb; sourceTree = "<group>"; };
+		0A39D6321F13896F00FAF835 /* info.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = info.rb; sourceTree = "<group>"; };
+		0A39D6331F13896F00FAF835 /* me.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = me.rb; sourceTree = "<group>"; };
+		0A39D6341F13896F00FAF835 /* push.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = push.rb; sourceTree = "<group>"; };
+		0A39D6351F13896F00FAF835 /* register.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = register.rb; sourceTree = "<group>"; };
+		0A39D6361F13896F00FAF835 /* remove_owner.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = remove_owner.rb; sourceTree = "<group>"; };
+		0A39D6371F13896F00FAF835 /* trunk.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = trunk.rb; sourceTree = "<group>"; };
+		0A39D6381F13896F00FAF835 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		0A39D6391F13896F00FAF835 /* Rakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Rakefile; sourceTree = "<group>"; };
+		0A39D63A1F13896F00FAF835 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		0A39D63E1F13896F00FAF835 /* addowner_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = addowner_spec.rb; sourceTree = "<group>"; };
+		0A39D63F1F13896F00FAF835 /* delete_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = delete_spec.rb; sourceTree = "<group>"; };
+		0A39D6401F13896F00FAF835 /* deprecate_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = deprecate_spec.rb; sourceTree = "<group>"; };
+		0A39D6411F13896F00FAF835 /* info_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = info_spec.rb; sourceTree = "<group>"; };
+		0A39D6421F13896F00FAF835 /* me_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = me_spec.rb; sourceTree = "<group>"; };
+		0A39D6431F13896F00FAF835 /* push_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = push_spec.rb; sourceTree = "<group>"; };
+		0A39D6441F13896F00FAF835 /* register_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = register_spec.rb; sourceTree = "<group>"; };
+		0A39D6451F13896F00FAF835 /* remove_owner_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = remove_owner_spec.rb; sourceTree = "<group>"; };
+		0A39D6461F13896F00FAF835 /* trunk_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = trunk_spec.rb; sourceTree = "<group>"; };
+		0A39D6481F13896F00FAF835 /* BananaLib.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = BananaLib.podspec; sourceTree = "<group>"; };
+		0A39D6491F13896F00FAF835 /* spec_helper.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = spec_helper.rb; sourceTree = "<group>"; };
+		0A39D64B1F13896F00FAF835 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		0A39D64C1F13896F00FAF835 /* .rubocop.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .rubocop.yml; sourceTree = "<group>"; };
+		0A39D64D1F13896F00FAF835 /* .rubocop_cocoapods.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .rubocop_cocoapods.yml; sourceTree = "<group>"; };
+		0A39D64E1F13896F00FAF835 /* .rubocop_todo.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .rubocop_todo.yml; sourceTree = "<group>"; };
+		0A39D64F1F13896F00FAF835 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
+		0A39D6501F13896F00FAF835 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		0A39D6511F13896F00FAF835 /* cocoapods-try.gemspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = "cocoapods-try.gemspec"; sourceTree = "<group>"; };
+		0A39D6521F13896F00FAF835 /* Gemfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Gemfile; sourceTree = "<group>"; };
+		0A39D6531F13896F00FAF835 /* Gemfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Gemfile.lock; sourceTree = "<group>"; };
+		0A39D6551F13896F00FAF835 /* cocoapods_plugin.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = cocoapods_plugin.rb; sourceTree = "<group>"; };
+		0A39D6561F13896F00FAF835 /* cocoapods_try.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = cocoapods_try.rb; sourceTree = "<group>"; };
+		0A39D6591F13896F00FAF835 /* try.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = try.rb; sourceTree = "<group>"; };
+		0A39D65A1F13896F00FAF835 /* try_settings.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = try_settings.rb; sourceTree = "<group>"; };
+		0A39D65B1F13896F00FAF835 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		0A39D65C1F13896F00FAF835 /* Rakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Rakefile; sourceTree = "<group>"; };
+		0A39D65D1F13896F00FAF835 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		0A39D6601F13896F00FAF835 /* try_settings_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = try_settings_spec.rb; sourceTree = "<group>"; };
+		0A39D6611F13896F00FAF835 /* try_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = try_spec.rb; sourceTree = "<group>"; };
+		0A39D6621F13896F00FAF835 /* spec_helper.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = spec_helper.rb; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0A39D3221F13891F00FAF835 = {
+			isa = PBXGroup;
+			children = (
+				0A39D4C61F13896F00FAF835 /* cocoapods */,
+				0A39D5541F13896F00FAF835 /* cocoapods-core */,
+				0A39D5881F13896F00FAF835 /* cocoapods-deintegrate */,
+				0A39D5941F13896F00FAF835 /* cocoapods-downloader */,
+				0A39D5A31F13896F00FAF835 /* cocoapods-plugins */,
+				0A39D5D11F13896F00FAF835 /* cocoapods-search */,
+				0A39D6051F13896F00FAF835 /* cocoapods-stats */,
+				0A39D61E1F13896F00FAF835 /* cocoapods-trunk */,
+				0A39D64A1F13896F00FAF835 /* cocoapods-try */,
+			);
+			sourceTree = "<group>";
+		};
+		0A39D4C61F13896F00FAF835 /* cocoapods */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D4C71F13896F00FAF835 /* bin */,
+				0A39D4CA1F13896F00FAF835 /* CHANGELOG.md */,
+				0A39D4CB1F13896F00FAF835 /* lib */,
+				0A39D5521F13896F00FAF835 /* LICENSE */,
+				0A39D5531F13896F00FAF835 /* README.md */,
+			);
+			path = cocoapods;
+			sourceTree = "<group>";
+		};
+		0A39D4C71F13896F00FAF835 /* bin */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D4C81F13896F00FAF835 /* pod */,
+				0A39D4C91F13896F00FAF835 /* sandbox-pod */,
+			);
+			path = bin;
+			sourceTree = "<group>";
+		};
+		0A39D4CB1F13896F00FAF835 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D4CC1F13896F00FAF835 /* cocoapods */,
+				0A39D5511F13896F00FAF835 /* cocoapods.rb */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		0A39D4CC1F13896F00FAF835 /* cocoapods */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D4CD1F13896F00FAF835 /* command */,
+				0A39D4F71F13896F00FAF835 /* command.rb */,
+				0A39D4F81F13896F00FAF835 /* config.rb */,
+				0A39D4F91F13896F00FAF835 /* core_overrides.rb */,
+				0A39D4FA1F13896F00FAF835 /* downloader */,
+				0A39D4FE1F13896F00FAF835 /* downloader.rb */,
+				0A39D4FF1F13896F00FAF835 /* executable.rb */,
+				0A39D5001F13896F00FAF835 /* external_sources */,
+				0A39D5051F13896F00FAF835 /* external_sources.rb */,
+				0A39D5061F13896F00FAF835 /* gem_version.rb */,
+				0A39D5071F13896F00FAF835 /* generator */,
+				0A39D51A1F13896F00FAF835 /* hooks_manager.rb */,
+				0A39D51B1F13896F00FAF835 /* installer */,
+				0A39D53A1F13896F00FAF835 /* installer.rb */,
+				0A39D53B1F13896F00FAF835 /* open-uri.rb */,
+				0A39D53C1F13896F00FAF835 /* project.rb */,
+				0A39D53D1F13896F00FAF835 /* resolver */,
+				0A39D53F1F13896F00FAF835 /* resolver.rb */,
+				0A39D5401F13896F00FAF835 /* sandbox */,
+				0A39D5461F13896F00FAF835 /* sandbox.rb */,
+				0A39D5471F13896F00FAF835 /* sources_manager.rb */,
+				0A39D5481F13896F00FAF835 /* target */,
+				0A39D54B1F13896F00FAF835 /* target.rb */,
+				0A39D54C1F13896F00FAF835 /* user_interface */,
+				0A39D54F1F13896F00FAF835 /* user_interface.rb */,
+				0A39D5501F13896F00FAF835 /* validator.rb */,
+			);
+			path = cocoapods;
+			sourceTree = "<group>";
+		};
+		0A39D4CD1F13896F00FAF835 /* command */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D4CE1F13896F00FAF835 /* cache */,
+				0A39D4D11F13896F00FAF835 /* cache.rb */,
+				0A39D4D21F13896F00FAF835 /* env.rb */,
+				0A39D4D31F13896F00FAF835 /* init.rb */,
+				0A39D4D41F13896F00FAF835 /* install.rb */,
+				0A39D4D51F13896F00FAF835 /* ipc */,
+				0A39D4DB1F13896F00FAF835 /* ipc.rb */,
+				0A39D4DC1F13896F00FAF835 /* lib */,
+				0A39D4DF1F13896F00FAF835 /* lib.rb */,
+				0A39D4E01F13896F00FAF835 /* list.rb */,
+				0A39D4E11F13896F00FAF835 /* options */,
+				0A39D4E41F13896F00FAF835 /* outdated.rb */,
+				0A39D4E51F13896F00FAF835 /* repo */,
+				0A39D4EC1F13896F00FAF835 /* repo.rb */,
+				0A39D4ED1F13896F00FAF835 /* setup.rb */,
+				0A39D4EE1F13896F00FAF835 /* spec */,
+				0A39D4F51F13896F00FAF835 /* spec.rb */,
+				0A39D4F61F13896F00FAF835 /* update.rb */,
+			);
+			path = command;
+			sourceTree = "<group>";
+		};
+		0A39D4CE1F13896F00FAF835 /* cache */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D4CF1F13896F00FAF835 /* clean.rb */,
+				0A39D4D01F13896F00FAF835 /* list.rb */,
+			);
+			path = cache;
+			sourceTree = "<group>";
+		};
+		0A39D4D51F13896F00FAF835 /* ipc */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D4D61F13896F00FAF835 /* list.rb */,
+				0A39D4D71F13896F00FAF835 /* podfile.rb */,
+				0A39D4D81F13896F00FAF835 /* repl.rb */,
+				0A39D4D91F13896F00FAF835 /* spec.rb */,
+				0A39D4DA1F13896F00FAF835 /* update_search_index.rb */,
+			);
+			path = ipc;
+			sourceTree = "<group>";
+		};
+		0A39D4DC1F13896F00FAF835 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D4DD1F13896F00FAF835 /* create.rb */,
+				0A39D4DE1F13896F00FAF835 /* lint.rb */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		0A39D4E11F13896F00FAF835 /* options */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D4E21F13896F00FAF835 /* project_directory.rb */,
+				0A39D4E31F13896F00FAF835 /* repo_update.rb */,
+			);
+			path = options;
+			sourceTree = "<group>";
+		};
+		0A39D4E51F13896F00FAF835 /* repo */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D4E61F13896F00FAF835 /* add.rb */,
+				0A39D4E71F13896F00FAF835 /* lint.rb */,
+				0A39D4E81F13896F00FAF835 /* list.rb */,
+				0A39D4E91F13896F00FAF835 /* push.rb */,
+				0A39D4EA1F13896F00FAF835 /* remove.rb */,
+				0A39D4EB1F13896F00FAF835 /* update.rb */,
+			);
+			path = repo;
+			sourceTree = "<group>";
+		};
+		0A39D4EE1F13896F00FAF835 /* spec */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D4EF1F13896F00FAF835 /* cat.rb */,
+				0A39D4F01F13896F00FAF835 /* create.rb */,
+				0A39D4F11F13896F00FAF835 /* edit.rb */,
+				0A39D4F21F13896F00FAF835 /* env_spec.rb */,
+				0A39D4F31F13896F00FAF835 /* lint.rb */,
+				0A39D4F41F13896F00FAF835 /* which.rb */,
+			);
+			path = spec;
+			sourceTree = "<group>";
+		};
+		0A39D4FA1F13896F00FAF835 /* downloader */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D4FB1F13896F00FAF835 /* cache.rb */,
+				0A39D4FC1F13896F00FAF835 /* request.rb */,
+				0A39D4FD1F13896F00FAF835 /* response.rb */,
+			);
+			path = downloader;
+			sourceTree = "<group>";
+		};
+		0A39D5001F13896F00FAF835 /* external_sources */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5011F13896F00FAF835 /* abstract_external_source.rb */,
+				0A39D5021F13896F00FAF835 /* downloader_source.rb */,
+				0A39D5031F13896F00FAF835 /* path_source.rb */,
+				0A39D5041F13896F00FAF835 /* podspec_source.rb */,
+			);
+			path = external_sources;
+			sourceTree = "<group>";
+		};
+		0A39D5071F13896F00FAF835 /* generator */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5081F13896F00FAF835 /* acknowledgements */,
+				0A39D50B1F13896F00FAF835 /* acknowledgements.rb */,
+				0A39D50C1F13896F00FAF835 /* bridge_support.rb */,
+				0A39D50D1F13896F00FAF835 /* copy_resources_script.rb */,
+				0A39D50E1F13896F00FAF835 /* dummy_source.rb */,
+				0A39D50F1F13896F00FAF835 /* embed_frameworks_script.rb */,
+				0A39D5101F13896F00FAF835 /* header.rb */,
+				0A39D5111F13896F00FAF835 /* info_plist_file.rb */,
+				0A39D5121F13896F00FAF835 /* module_map.rb */,
+				0A39D5131F13896F00FAF835 /* prefix_header.rb */,
+				0A39D5141F13896F00FAF835 /* umbrella_header.rb */,
+				0A39D5151F13896F00FAF835 /* xcconfig */,
+				0A39D5191F13896F00FAF835 /* xcconfig.rb */,
+			);
+			path = generator;
+			sourceTree = "<group>";
+		};
+		0A39D5081F13896F00FAF835 /* acknowledgements */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5091F13896F00FAF835 /* markdown.rb */,
+				0A39D50A1F13896F00FAF835 /* plist.rb */,
+			);
+			path = acknowledgements;
+			sourceTree = "<group>";
+		};
+		0A39D5151F13896F00FAF835 /* xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5161F13896F00FAF835 /* aggregate_xcconfig.rb */,
+				0A39D5171F13896F00FAF835 /* pod_xcconfig.rb */,
+				0A39D5181F13896F00FAF835 /* xcconfig_helper.rb */,
+			);
+			path = xcconfig;
+			sourceTree = "<group>";
+		};
+		0A39D51B1F13896F00FAF835 /* installer */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D51C1F13896F00FAF835 /* analyzer */,
+				0A39D5251F13896F00FAF835 /* analyzer.rb */,
+				0A39D5261F13896F00FAF835 /* installation_options.rb */,
+				0A39D5271F13896F00FAF835 /* pod_source_installer.rb */,
+				0A39D5281F13896F00FAF835 /* pod_source_preparer.rb */,
+				0A39D5291F13896F00FAF835 /* podfile_validator.rb */,
+				0A39D52A1F13896F00FAF835 /* post_install_hooks_context.rb */,
+				0A39D52B1F13896F00FAF835 /* pre_install_hooks_context.rb */,
+				0A39D52C1F13896F00FAF835 /* source_provider_hooks_context.rb */,
+				0A39D52D1F13896F00FAF835 /* user_project_integrator */,
+				0A39D5311F13896F00FAF835 /* user_project_integrator.rb */,
+				0A39D5321F13896F00FAF835 /* xcode */,
+				0A39D5391F13896F00FAF835 /* xcode.rb */,
+			);
+			path = installer;
+			sourceTree = "<group>";
+		};
+		0A39D51C1F13896F00FAF835 /* analyzer */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D51D1F13896F00FAF835 /* analysis_result.rb */,
+				0A39D51E1F13896F00FAF835 /* locking_dependency_analyzer.rb */,
+				0A39D51F1F13896F00FAF835 /* pod_variant.rb */,
+				0A39D5201F13896F00FAF835 /* pod_variant_set.rb */,
+				0A39D5211F13896F00FAF835 /* sandbox_analyzer.rb */,
+				0A39D5221F13896F00FAF835 /* specs_state.rb */,
+				0A39D5231F13896F00FAF835 /* target_inspection_result.rb */,
+				0A39D5241F13896F00FAF835 /* target_inspector.rb */,
+			);
+			path = analyzer;
+			sourceTree = "<group>";
+		};
+		0A39D52D1F13896F00FAF835 /* user_project_integrator */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D52E1F13896F00FAF835 /* target_integrator */,
+				0A39D5301F13896F00FAF835 /* target_integrator.rb */,
+			);
+			path = user_project_integrator;
+			sourceTree = "<group>";
+		};
+		0A39D52E1F13896F00FAF835 /* target_integrator */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D52F1F13896F00FAF835 /* xcconfig_integrator.rb */,
+			);
+			path = target_integrator;
+			sourceTree = "<group>";
+		};
+		0A39D5321F13896F00FAF835 /* xcode */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5331F13896F00FAF835 /* pods_project_generator */,
+				0A39D5381F13896F00FAF835 /* pods_project_generator.rb */,
+			);
+			path = xcode;
+			sourceTree = "<group>";
+		};
+		0A39D5331F13896F00FAF835 /* pods_project_generator */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5341F13896F00FAF835 /* aggregate_target_installer.rb */,
+				0A39D5351F13896F00FAF835 /* file_references_installer.rb */,
+				0A39D5361F13896F00FAF835 /* pod_target_installer.rb */,
+				0A39D5371F13896F00FAF835 /* target_installer.rb */,
+			);
+			path = pods_project_generator;
+			sourceTree = "<group>";
+		};
+		0A39D53D1F13896F00FAF835 /* resolver */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D53E1F13896F00FAF835 /* lazy_specification.rb */,
+			);
+			path = resolver;
+			sourceTree = "<group>";
+		};
+		0A39D5401F13896F00FAF835 /* sandbox */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5411F13896F00FAF835 /* file_accessor.rb */,
+				0A39D5421F13896F00FAF835 /* headers_store.rb */,
+				0A39D5431F13896F00FAF835 /* path_list.rb */,
+				0A39D5441F13896F00FAF835 /* pod_dir_cleaner.rb */,
+				0A39D5451F13896F00FAF835 /* podspec_finder.rb */,
+			);
+			path = sandbox;
+			sourceTree = "<group>";
+		};
+		0A39D5481F13896F00FAF835 /* target */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5491F13896F00FAF835 /* aggregate_target.rb */,
+				0A39D54A1F13896F00FAF835 /* pod_target.rb */,
+			);
+			path = target;
+			sourceTree = "<group>";
+		};
+		0A39D54C1F13896F00FAF835 /* user_interface */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D54D1F13896F00FAF835 /* error_report.rb */,
+				0A39D54E1F13896F00FAF835 /* inspector_reporter.rb */,
+			);
+			path = user_interface;
+			sourceTree = "<group>";
+		};
+		0A39D5541F13896F00FAF835 /* cocoapods-core */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5551F13896F00FAF835 /* lib */,
+				0A39D5861F13896F00FAF835 /* LICENSE */,
+				0A39D5871F13896F00FAF835 /* README.md */,
+			);
+			path = "cocoapods-core";
+			sourceTree = "<group>";
+		};
+		0A39D5551F13896F00FAF835 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5561F13896F00FAF835 /* cocoapods-core */,
+				0A39D5851F13896F00FAF835 /* cocoapods-core.rb */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		0A39D5561F13896F00FAF835 /* cocoapods-core */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5571F13896F00FAF835 /* core_ui.rb */,
+				0A39D5581F13896F00FAF835 /* dependency.rb */,
+				0A39D5591F13896F00FAF835 /* gem_version.rb */,
+				0A39D55A1F13896F00FAF835 /* github.rb */,
+				0A39D55B1F13896F00FAF835 /* http.rb */,
+				0A39D55C1F13896F00FAF835 /* lockfile.rb */,
+				0A39D55D1F13896F00FAF835 /* master_source.rb */,
+				0A39D55E1F13896F00FAF835 /* metrics.rb */,
+				0A39D55F1F13896F00FAF835 /* platform.rb */,
+				0A39D5601F13896F00FAF835 /* podfile */,
+				0A39D5631F13896F00FAF835 /* podfile.rb */,
+				0A39D5641F13896F00FAF835 /* requirement.rb */,
+				0A39D5651F13896F00FAF835 /* source */,
+				0A39D56B1F13896F00FAF835 /* source.rb */,
+				0A39D56C1F13896F00FAF835 /* specification */,
+				0A39D57D1F13896F00FAF835 /* specification.rb */,
+				0A39D57E1F13896F00FAF835 /* standard_error.rb */,
+				0A39D57F1F13896F00FAF835 /* vendor */,
+				0A39D5821F13896F00FAF835 /* vendor.rb */,
+				0A39D5831F13896F00FAF835 /* version.rb */,
+				0A39D5841F13896F00FAF835 /* yaml_helper.rb */,
+			);
+			path = "cocoapods-core";
+			sourceTree = "<group>";
+		};
+		0A39D5601F13896F00FAF835 /* podfile */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5611F13896F00FAF835 /* dsl.rb */,
+				0A39D5621F13896F00FAF835 /* target_definition.rb */,
+			);
+			path = podfile;
+			sourceTree = "<group>";
+		};
+		0A39D5651F13896F00FAF835 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5661F13896F00FAF835 /* acceptor.rb */,
+				0A39D5671F13896F00FAF835 /* aggregate.rb */,
+				0A39D5681F13896F00FAF835 /* health_reporter.rb */,
+				0A39D5691F13896F00FAF835 /* manager.rb */,
+				0A39D56A1F13896F00FAF835 /* metadata.rb */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+		0A39D56C1F13896F00FAF835 /* specification */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D56D1F13896F00FAF835 /* consumer.rb */,
+				0A39D56E1F13896F00FAF835 /* dsl */,
+				0A39D5731F13896F00FAF835 /* dsl.rb */,
+				0A39D5741F13896F00FAF835 /* json.rb */,
+				0A39D5751F13896F00FAF835 /* linter */,
+				0A39D5781F13896F00FAF835 /* linter.rb */,
+				0A39D5791F13896F00FAF835 /* root_attribute_accessors.rb */,
+				0A39D57A1F13896F00FAF835 /* set */,
+				0A39D57C1F13896F00FAF835 /* set.rb */,
+			);
+			path = specification;
+			sourceTree = "<group>";
+		};
+		0A39D56E1F13896F00FAF835 /* dsl */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D56F1F13896F00FAF835 /* attribute.rb */,
+				0A39D5701F13896F00FAF835 /* attribute_support.rb */,
+				0A39D5711F13896F00FAF835 /* deprecations.rb */,
+				0A39D5721F13896F00FAF835 /* platform_proxy.rb */,
+			);
+			path = dsl;
+			sourceTree = "<group>";
+		};
+		0A39D5751F13896F00FAF835 /* linter */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5761F13896F00FAF835 /* analyzer.rb */,
+				0A39D5771F13896F00FAF835 /* result.rb */,
+			);
+			path = linter;
+			sourceTree = "<group>";
+		};
+		0A39D57A1F13896F00FAF835 /* set */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D57B1F13896F00FAF835 /* presenter.rb */,
+			);
+			path = set;
+			sourceTree = "<group>";
+		};
+		0A39D57F1F13896F00FAF835 /* vendor */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5801F13896F00FAF835 /* requirement.rb */,
+				0A39D5811F13896F00FAF835 /* version.rb */,
+			);
+			path = vendor;
+			sourceTree = "<group>";
+		};
+		0A39D5881F13896F00FAF835 /* cocoapods-deintegrate */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5891F13896F00FAF835 /* lib */,
+				0A39D5921F13896F00FAF835 /* LICENSE */,
+				0A39D5931F13896F00FAF835 /* README.md */,
+			);
+			path = "cocoapods-deintegrate";
+			sourceTree = "<group>";
+		};
+		0A39D5891F13896F00FAF835 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D58A1F13896F00FAF835 /* cocoapods */,
+				0A39D5901F13896F00FAF835 /* cocoapods_deintegrate.rb */,
+				0A39D5911F13896F00FAF835 /* cocoapods_plugin.rb */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		0A39D58A1F13896F00FAF835 /* cocoapods */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D58B1F13896F00FAF835 /* command */,
+				0A39D58D1F13896F00FAF835 /* deintegrate */,
+				0A39D58F1F13896F00FAF835 /* deintegrator.rb */,
+			);
+			path = cocoapods;
+			sourceTree = "<group>";
+		};
+		0A39D58B1F13896F00FAF835 /* command */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D58C1F13896F00FAF835 /* deintegrate.rb */,
+			);
+			path = command;
+			sourceTree = "<group>";
+		};
+		0A39D58D1F13896F00FAF835 /* deintegrate */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D58E1F13896F00FAF835 /* gem_version.rb */,
+			);
+			path = deintegrate;
+			sourceTree = "<group>";
+		};
+		0A39D5941F13896F00FAF835 /* cocoapods-downloader */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5951F13896F00FAF835 /* lib */,
+				0A39D5A11F13896F00FAF835 /* LICENSE */,
+				0A39D5A21F13896F00FAF835 /* README.markdown */,
+			);
+			path = "cocoapods-downloader";
+			sourceTree = "<group>";
+		};
+		0A39D5951F13896F00FAF835 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5961F13896F00FAF835 /* cocoapods-downloader */,
+				0A39D5A01F13896F00FAF835 /* cocoapods-downloader.rb */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		0A39D5961F13896F00FAF835 /* cocoapods-downloader */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5971F13896F00FAF835 /* api.rb */,
+				0A39D5981F13896F00FAF835 /* api_exposable.rb */,
+				0A39D5991F13896F00FAF835 /* base.rb */,
+				0A39D59A1F13896F00FAF835 /* bazaar.rb */,
+				0A39D59B1F13896F00FAF835 /* gem_version.rb */,
+				0A39D59C1F13896F00FAF835 /* git.rb */,
+				0A39D59D1F13896F00FAF835 /* http.rb */,
+				0A39D59E1F13896F00FAF835 /* mercurial.rb */,
+				0A39D59F1F13896F00FAF835 /* subversion.rb */,
+			);
+			path = "cocoapods-downloader";
+			sourceTree = "<group>";
+		};
+		0A39D5A31F13896F00FAF835 /* cocoapods-plugins */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5A41F13896F00FAF835 /* .gitignore */,
+				0A39D5A51F13896F00FAF835 /* .rubocop.yml */,
+				0A39D5A61F13896F00FAF835 /* .rubocop_cocoapods.yml */,
+				0A39D5A71F13896F00FAF835 /* .travis.yml */,
+				0A39D5A81F13896F00FAF835 /* CHANGELOG.md */,
+				0A39D5A91F13896F00FAF835 /* cocoapods-plugins.gemspec */,
+				0A39D5AA1F13896F00FAF835 /* Gemfile */,
+				0A39D5AB1F13896F00FAF835 /* Gemfile.lock */,
+				0A39D5AC1F13896F00FAF835 /* lib */,
+				0A39D5BB1F13896F00FAF835 /* LICENSE */,
+				0A39D5BC1F13896F00FAF835 /* plugins.json */,
+				0A39D5BD1F13896F00FAF835 /* Rakefile */,
+				0A39D5BE1F13896F00FAF835 /* README.md */,
+				0A39D5BF1F13896F00FAF835 /* spec */,
+			);
+			path = "cocoapods-plugins";
+			sourceTree = "<group>";
+		};
+		0A39D5AC1F13896F00FAF835 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5AD1F13896F00FAF835 /* cocoapods_plugin.rb */,
+				0A39D5AE1F13896F00FAF835 /* cocoapods_plugins.rb */,
+				0A39D5AF1F13896F00FAF835 /* pod */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		0A39D5AF1F13896F00FAF835 /* pod */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5B01F13896F00FAF835 /* command */,
+			);
+			path = pod;
+			sourceTree = "<group>";
+		};
+		0A39D5B01F13896F00FAF835 /* command */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5B11F13896F00FAF835 /* gem_helper.rb */,
+				0A39D5B21F13896F00FAF835 /* gem_index_cache.rb */,
+				0A39D5B31F13896F00FAF835 /* plugins */,
+				0A39D5B91F13896F00FAF835 /* plugins.rb */,
+				0A39D5BA1F13896F00FAF835 /* plugins_helper.rb */,
+			);
+			path = command;
+			sourceTree = "<group>";
+		};
+		0A39D5B31F13896F00FAF835 /* plugins */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5B41F13896F00FAF835 /* create.rb */,
+				0A39D5B51F13896F00FAF835 /* installed.rb */,
+				0A39D5B61F13896F00FAF835 /* list.rb */,
+				0A39D5B71F13896F00FAF835 /* publish.rb */,
+				0A39D5B81F13896F00FAF835 /* search.rb */,
+			);
+			path = plugins;
+			sourceTree = "<group>";
+		};
+		0A39D5BF1F13896F00FAF835 /* spec */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5C01F13896F00FAF835 /* command */,
+				0A39D5CB1F13896F00FAF835 /* fixtures */,
+				0A39D5D01F13896F00FAF835 /* spec_helper.rb */,
+			);
+			path = spec;
+			sourceTree = "<group>";
+		};
+		0A39D5C01F13896F00FAF835 /* command */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5C11F13896F00FAF835 /* gem_helper_spec.rb */,
+				0A39D5C21F13896F00FAF835 /* gem_index_cache_spec.rb */,
+				0A39D5C31F13896F00FAF835 /* plugins */,
+				0A39D5C91F13896F00FAF835 /* plugins_helper_spec.rb */,
+				0A39D5CA1F13896F00FAF835 /* plugins_spec.rb */,
+			);
+			path = command;
+			sourceTree = "<group>";
+		};
+		0A39D5C31F13896F00FAF835 /* plugins */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5C41F13896F00FAF835 /* create_spec.rb */,
+				0A39D5C51F13896F00FAF835 /* installed_spec.rb */,
+				0A39D5C61F13896F00FAF835 /* list_spec.rb */,
+				0A39D5C71F13896F00FAF835 /* publish_spec.rb */,
+				0A39D5C81F13896F00FAF835 /* search_spec.rb */,
+			);
+			path = plugins;
+			sourceTree = "<group>";
+		};
+		0A39D5CB1F13896F00FAF835 /* fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5CC1F13896F00FAF835 /* cocoapods-foo1.gemspec */,
+				0A39D5CD1F13896F00FAF835 /* cocoapods-foo2.gemspec */,
+				0A39D5CE1F13896F00FAF835 /* plugins.json */,
+				0A39D5CF1F13896F00FAF835 /* unprefixed.gemspec */,
+			);
+			path = fixtures;
+			sourceTree = "<group>";
+		};
+		0A39D5D11F13896F00FAF835 /* cocoapods-search */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5D21F13896F00FAF835 /* .gitignore */,
+				0A39D5D31F13896F00FAF835 /* .gitmodules */,
+				0A39D5D41F13896F00FAF835 /* .travis.yml */,
+				0A39D5D51F13896F00FAF835 /* CHANGELOG.md */,
+				0A39D5D61F13896F00FAF835 /* cocoapods-search.gemspec */,
+				0A39D5D71F13896F00FAF835 /* Gemfile */,
+				0A39D5D81F13896F00FAF835 /* Gemfile.lock */,
+				0A39D5D91F13896F00FAF835 /* lib */,
+				0A39D5E11F13896F00FAF835 /* LICENSE.txt */,
+				0A39D5E21F13896F00FAF835 /* Rakefile */,
+				0A39D5E31F13896F00FAF835 /* README.md */,
+				0A39D5E41F13896F00FAF835 /* spec */,
+			);
+			path = "cocoapods-search";
+			sourceTree = "<group>";
+		};
+		0A39D5D91F13896F00FAF835 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5DA1F13896F00FAF835 /* cocoapods-search */,
+				0A39D5DF1F13896F00FAF835 /* cocoapods-search.rb */,
+				0A39D5E01F13896F00FAF835 /* cocoapods_plugin.rb */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		0A39D5DA1F13896F00FAF835 /* cocoapods-search */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5DB1F13896F00FAF835 /* command */,
+				0A39D5DD1F13896F00FAF835 /* command.rb */,
+				0A39D5DE1F13896F00FAF835 /* gem_version.rb */,
+			);
+			path = "cocoapods-search";
+			sourceTree = "<group>";
+		};
+		0A39D5DB1F13896F00FAF835 /* command */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5DC1F13896F00FAF835 /* search.rb */,
+			);
+			path = command;
+			sourceTree = "<group>";
+		};
+		0A39D5E41F13896F00FAF835 /* spec */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5E51F13896F00FAF835 /* command */,
+				0A39D5E71F13896F00FAF835 /* fixtures */,
+				0A39D5FE1F13896F00FAF835 /* spec_helper */,
+				0A39D6041F13896F00FAF835 /* spec_helper.rb */,
+			);
+			path = spec;
+			sourceTree = "<group>";
+		};
+		0A39D5E51F13896F00FAF835 /* command */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5E61F13896F00FAF835 /* search_spec.rb */,
+			);
+			path = command;
+			sourceTree = "<group>";
+		};
+		0A39D5E71F13896F00FAF835 /* fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5E81F13896F00FAF835 /* spec-repos */,
+			);
+			path = fixtures;
+			sourceTree = "<group>";
+		};
+		0A39D5E81F13896F00FAF835 /* spec-repos */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5E91F13896F00FAF835 /* test_repo */,
+			);
+			path = "spec-repos";
+			sourceTree = "<group>";
+		};
+		0A39D5E91F13896F00FAF835 /* test_repo */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5EA1F13896F00FAF835 /* BananaLib */,
+				0A39D5ED1F13896F00FAF835 /* JSONKit */,
+				0A39D5F21F13896F00FAF835 /* monkey */,
+				0A39D5F51F13896F00FAF835 /* OrangeFramework */,
+				0A39D5F81F13896F00FAF835 /* Pod+With+Plus+Signs */,
+				0A39D5FB1F13896F00FAF835 /* Realm */,
+			);
+			path = test_repo;
+			sourceTree = "<group>";
+		};
+		0A39D5EA1F13896F00FAF835 /* BananaLib */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5EB1F13896F00FAF835 /* 1.0 */,
+			);
+			path = BananaLib;
+			sourceTree = "<group>";
+		};
+		0A39D5EB1F13896F00FAF835 /* 1.0 */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5EC1F13896F00FAF835 /* BananaLib.podspec */,
+			);
+			path = 1.0;
+			sourceTree = "<group>";
+		};
+		0A39D5ED1F13896F00FAF835 /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5EE1F13896F00FAF835 /* 1.4 */,
+				0A39D5F01F13896F00FAF835 /* 999.999.999 */,
+			);
+			path = JSONKit;
+			sourceTree = "<group>";
+		};
+		0A39D5EE1F13896F00FAF835 /* 1.4 */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5EF1F13896F00FAF835 /* JSONKit.podspec */,
+			);
+			path = 1.4;
+			sourceTree = "<group>";
+		};
+		0A39D5F01F13896F00FAF835 /* 999.999.999 */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5F11F13896F00FAF835 /* JSONKit.podspec */,
+			);
+			path = 999.999.999;
+			sourceTree = "<group>";
+		};
+		0A39D5F21F13896F00FAF835 /* monkey */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5F31F13896F00FAF835 /* 1.0.2 */,
+			);
+			path = monkey;
+			sourceTree = "<group>";
+		};
+		0A39D5F31F13896F00FAF835 /* 1.0.2 */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5F41F13896F00FAF835 /* monkey.podspec */,
+			);
+			path = 1.0.2;
+			sourceTree = "<group>";
+		};
+		0A39D5F51F13896F00FAF835 /* OrangeFramework */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5F61F13896F00FAF835 /* 0.1.0 */,
+			);
+			path = OrangeFramework;
+			sourceTree = "<group>";
+		};
+		0A39D5F61F13896F00FAF835 /* 0.1.0 */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5F71F13896F00FAF835 /* OrangeFramework.podspec */,
+			);
+			path = 0.1.0;
+			sourceTree = "<group>";
+		};
+		0A39D5F81F13896F00FAF835 /* Pod+With+Plus+Signs */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5F91F13896F00FAF835 /* 1.0 */,
+			);
+			path = "Pod+With+Plus+Signs";
+			sourceTree = "<group>";
+		};
+		0A39D5F91F13896F00FAF835 /* 1.0 */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5FA1F13896F00FAF835 /* Pod+With+Plus+Signs.podspec */,
+			);
+			path = 1.0;
+			sourceTree = "<group>";
+		};
+		0A39D5FB1F13896F00FAF835 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5FC1F13896F00FAF835 /* 0.94 */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		0A39D5FC1F13896F00FAF835 /* 0.94 */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5FD1F13896F00FAF835 /* Realm.podspec */,
+			);
+			path = 0.94;
+			sourceTree = "<group>";
+		};
+		0A39D5FE1F13896F00FAF835 /* spec_helper */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D5FF1F13896F00FAF835 /* command.rb */,
+				0A39D6001F13896F00FAF835 /* fixture.rb */,
+				0A39D6011F13896F00FAF835 /* pre_flight.rb */,
+				0A39D6021F13896F00FAF835 /* temporary_repos.rb */,
+				0A39D6031F13896F00FAF835 /* user_interface.rb */,
+			);
+			path = spec_helper;
+			sourceTree = "<group>";
+		};
+		0A39D6051F13896F00FAF835 /* cocoapods-stats */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D6061F13896F00FAF835 /* .gitignore */,
+				0A39D6071F13896F00FAF835 /* .rubocop.yml */,
+				0A39D6081F13896F00FAF835 /* .rubocop_cocoapods.yml */,
+				0A39D6091F13896F00FAF835 /* .travis.yml */,
+				0A39D60A1F13896F00FAF835 /* CHANGELOG.md */,
+				0A39D60B1F13896F00FAF835 /* cocoapods-stats.gemspec */,
+				0A39D60C1F13896F00FAF835 /* Gemfile */,
+				0A39D60D1F13896F00FAF835 /* Gemfile.lock */,
+				0A39D60E1F13896F00FAF835 /* lib */,
+				0A39D6151F13896F00FAF835 /* LICENSE */,
+				0A39D6161F13896F00FAF835 /* LICENSE.txt */,
+				0A39D6171F13896F00FAF835 /* Rakefile */,
+				0A39D6181F13896F00FAF835 /* README.md */,
+				0A39D6191F13896F00FAF835 /* spec */,
+			);
+			path = "cocoapods-stats";
+			sourceTree = "<group>";
+		};
+		0A39D60E1F13896F00FAF835 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D60F1F13896F00FAF835 /* cocoapods_plugin.rb */,
+				0A39D6101F13896F00FAF835 /* cocoapods_stats */,
+				0A39D6141F13896F00FAF835 /* cocoapods_stats.rb */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		0A39D6101F13896F00FAF835 /* cocoapods_stats */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D6111F13896F00FAF835 /* gem_version.rb */,
+				0A39D6121F13896F00FAF835 /* sender.rb */,
+				0A39D6131F13896F00FAF835 /* target_mapper.rb */,
+			);
+			path = cocoapods_stats;
+			sourceTree = "<group>";
+		};
+		0A39D6191F13896F00FAF835 /* spec */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D61A1F13896F00FAF835 /* env_validator_spec.rb */,
+				0A39D61B1F13896F00FAF835 /* spec_helper.rb */,
+				0A39D61C1F13896F00FAF835 /* target_mapper_spec.rb */,
+				0A39D61D1F13896F00FAF835 /* validator_spec.rb */,
+			);
+			path = spec;
+			sourceTree = "<group>";
+		};
+		0A39D61E1F13896F00FAF835 /* cocoapods-trunk */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D61F1F13896F00FAF835 /* .gitignore */,
+				0A39D6201F13896F00FAF835 /* .kick */,
+				0A39D6211F13896F00FAF835 /* .rubocop.yml */,
+				0A39D6221F13896F00FAF835 /* .rubocop_cocoapods.yml */,
+				0A39D6231F13896F00FAF835 /* .rubocop_todo.yml */,
+				0A39D6241F13896F00FAF835 /* .travis.yml */,
+				0A39D6251F13896F00FAF835 /* CHANGELOG.md */,
+				0A39D6261F13896F00FAF835 /* cocoapods-trunk.gemspec */,
+				0A39D6271F13896F00FAF835 /* Gemfile */,
+				0A39D6281F13896F00FAF835 /* Gemfile.lock */,
+				0A39D6291F13896F00FAF835 /* lib */,
+				0A39D6381F13896F00FAF835 /* LICENSE.txt */,
+				0A39D6391F13896F00FAF835 /* Rakefile */,
+				0A39D63A1F13896F00FAF835 /* README.md */,
+				0A39D63B1F13896F00FAF835 /* spec */,
+			);
+			path = "cocoapods-trunk";
+			sourceTree = "<group>";
+		};
+		0A39D6291F13896F00FAF835 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D62A1F13896F00FAF835 /* cocoapods_plugin.rb */,
+				0A39D62B1F13896F00FAF835 /* cocoapods_trunk.rb */,
+				0A39D62C1F13896F00FAF835 /* pod */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		0A39D62C1F13896F00FAF835 /* pod */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D62D1F13896F00FAF835 /* command */,
+			);
+			path = pod;
+			sourceTree = "<group>";
+		};
+		0A39D62D1F13896F00FAF835 /* command */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D62E1F13896F00FAF835 /* trunk */,
+				0A39D6371F13896F00FAF835 /* trunk.rb */,
+			);
+			path = command;
+			sourceTree = "<group>";
+		};
+		0A39D62E1F13896F00FAF835 /* trunk */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D62F1F13896F00FAF835 /* add_owner.rb */,
+				0A39D6301F13896F00FAF835 /* delete.rb */,
+				0A39D6311F13896F00FAF835 /* deprecate.rb */,
+				0A39D6321F13896F00FAF835 /* info.rb */,
+				0A39D6331F13896F00FAF835 /* me.rb */,
+				0A39D6341F13896F00FAF835 /* push.rb */,
+				0A39D6351F13896F00FAF835 /* register.rb */,
+				0A39D6361F13896F00FAF835 /* remove_owner.rb */,
+			);
+			path = trunk;
+			sourceTree = "<group>";
+		};
+		0A39D63B1F13896F00FAF835 /* spec */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D63C1F13896F00FAF835 /* command */,
+				0A39D6471F13896F00FAF835 /* fixtures */,
+				0A39D6491F13896F00FAF835 /* spec_helper.rb */,
+			);
+			path = spec;
+			sourceTree = "<group>";
+		};
+		0A39D63C1F13896F00FAF835 /* command */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D63D1F13896F00FAF835 /* trunk */,
+				0A39D6461F13896F00FAF835 /* trunk_spec.rb */,
+			);
+			path = command;
+			sourceTree = "<group>";
+		};
+		0A39D63D1F13896F00FAF835 /* trunk */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D63E1F13896F00FAF835 /* addowner_spec.rb */,
+				0A39D63F1F13896F00FAF835 /* delete_spec.rb */,
+				0A39D6401F13896F00FAF835 /* deprecate_spec.rb */,
+				0A39D6411F13896F00FAF835 /* info_spec.rb */,
+				0A39D6421F13896F00FAF835 /* me_spec.rb */,
+				0A39D6431F13896F00FAF835 /* push_spec.rb */,
+				0A39D6441F13896F00FAF835 /* register_spec.rb */,
+				0A39D6451F13896F00FAF835 /* remove_owner_spec.rb */,
+			);
+			path = trunk;
+			sourceTree = "<group>";
+		};
+		0A39D6471F13896F00FAF835 /* fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D6481F13896F00FAF835 /* BananaLib.podspec */,
+			);
+			path = fixtures;
+			sourceTree = "<group>";
+		};
+		0A39D64A1F13896F00FAF835 /* cocoapods-try */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D64B1F13896F00FAF835 /* .gitignore */,
+				0A39D64C1F13896F00FAF835 /* .rubocop.yml */,
+				0A39D64D1F13896F00FAF835 /* .rubocop_cocoapods.yml */,
+				0A39D64E1F13896F00FAF835 /* .rubocop_todo.yml */,
+				0A39D64F1F13896F00FAF835 /* .travis.yml */,
+				0A39D6501F13896F00FAF835 /* CHANGELOG.md */,
+				0A39D6511F13896F00FAF835 /* cocoapods-try.gemspec */,
+				0A39D6521F13896F00FAF835 /* Gemfile */,
+				0A39D6531F13896F00FAF835 /* Gemfile.lock */,
+				0A39D6541F13896F00FAF835 /* lib */,
+				0A39D65B1F13896F00FAF835 /* LICENSE */,
+				0A39D65C1F13896F00FAF835 /* Rakefile */,
+				0A39D65D1F13896F00FAF835 /* README.md */,
+				0A39D65E1F13896F00FAF835 /* spec */,
+			);
+			path = "cocoapods-try";
+			sourceTree = "<group>";
+		};
+		0A39D6541F13896F00FAF835 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D6551F13896F00FAF835 /* cocoapods_plugin.rb */,
+				0A39D6561F13896F00FAF835 /* cocoapods_try.rb */,
+				0A39D6571F13896F00FAF835 /* pod */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		0A39D6571F13896F00FAF835 /* pod */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D6581F13896F00FAF835 /* command */,
+				0A39D65A1F13896F00FAF835 /* try_settings.rb */,
+			);
+			path = pod;
+			sourceTree = "<group>";
+		};
+		0A39D6581F13896F00FAF835 /* command */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D6591F13896F00FAF835 /* try.rb */,
+			);
+			path = command;
+			sourceTree = "<group>";
+		};
+		0A39D65E1F13896F00FAF835 /* spec */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D65F1F13896F00FAF835 /* command */,
+				0A39D6621F13896F00FAF835 /* spec_helper.rb */,
+			);
+			path = spec;
+			sourceTree = "<group>";
+		};
+		0A39D65F1F13896F00FAF835 /* command */ = {
+			isa = PBXGroup;
+			children = (
+				0A39D6601F13896F00FAF835 /* try_settings_spec.rb */,
+				0A39D6611F13896F00FAF835 /* try_spec.rb */,
+			);
+			path = command;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		0A39D3231F13891F00FAF835 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+			};
+			buildConfigurationList = 0A39D3261F13891F00FAF835 /* Build configuration list for PBXProject "CocoaPodsSource" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0A39D3221F13891F00FAF835;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		0A39D3271F13891F00FAF835 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		0A39D3281F13891F00FAF835 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0A39D3261F13891F00FAF835 /* Build configuration list for PBXProject "CocoaPodsSource" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A39D3271F13891F00FAF835 /* Debug */,
+				0A39D3281F13891F00FAF835 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0A39D3231F13891F00FAF835 /* Project object */;
+}
