@@ -84,7 +84,7 @@ module Pod
             native_target.build_configurations.each do |configuration|
               path = target.xcconfig_path(configuration.name)
               gen = Generator::XCConfig::AggregateXCConfig.new(target, configuration.name)
-              gen.save_as(path)
+              update_changed_file(gen, path)
               target.xcconfigs[configuration.name] = gen.xcconfig
               xcconfig_file_ref = add_file_to_support_group(path)
               configuration.base_configuration_reference = xcconfig_file_ref
@@ -104,31 +104,8 @@ module Pod
               path = target.bridge_support_path
               headers = native_target.headers_build_phase.files.map { |bf| sandbox.root + bf.file_ref.path }
               generator = Generator::BridgeSupport.new(headers)
-              generator.save_as(path)
+              update_changed_file(generator, path)
               add_file_to_support_group(path)
-              @bridge_support_file = path.relative_path_from(sandbox.root)
-            end
-          end
-
-          # Uniqued Resources grouped by config
-          #
-          # @return [Hash{ Symbol => Array<Pathname> }]
-          #
-          def resources_by_config
-            library_targets = target.pod_targets.reject do |pod_target|
-              pod_target.should_build? && pod_target.requires_frameworks?
-            end
-            target.user_build_configurations.keys.each_with_object({}) do |config, resources_by_config|
-              resources_by_config[config] = library_targets.flat_map do |library_target|
-                next [] unless library_target.include_in_build_config?(target_definition, config)
-                resource_paths = library_target.file_accessors.flat_map do |accessor|
-                  accessor.resources.flat_map { |res| res.relative_path_from(project.path.dirname) }
-                end
-                resource_bundles = library_target.file_accessors.flat_map do |accessor|
-                  accessor.resource_bundles.keys.map { |name| "#{library_target.configuration_build_dir}/#{name.shellescape}.bundle" }
-                end
-                (resource_paths + resource_bundles + [bridge_support_file].compact).uniq
-              end
             end
           end
 
@@ -142,8 +119,8 @@ module Pod
           #
           def create_copy_resources_script
             path = target.copy_resources_script_path
-            generator = Generator::CopyResourcesScript.new(resources_by_config, target.platform)
-            generator.save_as(path)
+            generator = Generator::CopyResourcesScript.new(target.resource_paths_by_config, target.platform)
+            update_changed_file(generator, path)
             add_file_to_support_group(path)
           end
 
@@ -158,19 +135,8 @@ module Pod
           #
           def create_embed_frameworks_script
             path = target.embed_frameworks_script_path
-            frameworks_by_config = {}
-            target.user_build_configurations.keys.each do |config|
-              relevant_pod_targets = target.pod_targets.select do |pod_target|
-                pod_target.include_in_build_config?(target_definition, config)
-              end
-              frameworks_by_config[config] = relevant_pod_targets.flat_map do |pod_target|
-                frameworks = pod_target.file_accessors.flat_map(&:vendored_dynamic_artifacts).map { |fw| "${PODS_ROOT}/#{fw.relative_path_from(sandbox.root)}" }
-                frameworks << pod_target.build_product_path('$BUILT_PRODUCTS_DIR') if pod_target.should_build? && pod_target.requires_frameworks?
-                frameworks
-              end
-            end
-            generator = Generator::EmbedFrameworksScript.new(frameworks_by_config)
-            generator.save_as(path)
+            generator = Generator::EmbedFrameworksScript.new(target.framework_paths_by_config)
+            update_changed_file(generator, path)
             add_file_to_support_group(path)
           end
 
@@ -184,17 +150,10 @@ module Pod
               path = generator_class.path_from_basepath(basepath)
               file_accessors = target.pod_targets.map(&:file_accessors).flatten
               generator = generator_class.new(file_accessors)
-              generator.save_as(path)
+              update_changed_file(generator, path)
               add_file_to_support_group(path)
             end
           end
-
-          # @return [Pathname] the path of the bridge support file relative to the
-          #         sandbox.
-          #
-          # @return [Nil] if no bridge support file was generated.
-          #
-          attr_reader :bridge_support_file
 
           #-----------------------------------------------------------------------#
         end

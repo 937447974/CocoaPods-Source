@@ -71,6 +71,7 @@ module Pod
       @lockfile = lockfile
 
       @use_default_plugins = true
+      @has_dependencies = true
     end
 
     # @return [Hash, Boolean, nil] Pods that have been requested to be
@@ -79,6 +80,11 @@ module Pod
     #         not taken into account for deciding what Pods to install.
     #
     attr_accessor :update
+
+    # @return [Boolean] Whether it has dependencies. Defaults to true.
+    #
+    attr_accessor :has_dependencies
+    alias_method :has_dependencies?, :has_dependencies
 
     # @return [Boolean] Whether the spec repos should be updated.
     #
@@ -109,9 +115,7 @@ module Pod
       prepare
       resolve_dependencies
       download_dependencies
-      verify_no_duplicate_framework_and_library_names
-      verify_no_static_framework_transitive_dependencies
-      verify_framework_usage
+      validate_targets
       generate_pods_project
       if installation_options.integrate_targets?
         integrate_user_project
@@ -214,7 +218,9 @@ module Pod
     #         generated as result of the analyzer.
     #
     def pod_targets
-      aggregate_targets.map(&:pod_targets).flatten.uniq
+      aggregate_target_pod_targets = aggregate_targets.map(&:pod_targets).flatten
+      test_dependent_targets = aggregate_target_pod_targets.map(&:test_dependent_targets).flatten
+      (aggregate_target_pod_targets + test_dependent_targets).uniq
     end
 
     # @return [Array<Specification>] The specifications that where installed.
@@ -240,6 +246,7 @@ module Pod
     def create_analyzer
       Analyzer.new(sandbox, podfile, lockfile).tap do |analyzer|
         analyzer.installation_options = installation_options
+        analyzer.has_dependencies = has_dependencies?
       end
     end
 
@@ -272,9 +279,17 @@ module Pod
     #
     def clean_sandbox
       sandbox.public_headers.implode!
+      target_support_dirs = sandbox.target_support_files_root.children.select(&:directory?)
       pod_targets.each do |pod_target|
         pod_target.build_headers.implode!
+        target_support_dirs.delete(pod_target.support_files_dir)
       end
+
+      aggregate_targets.each do |aggregate_target|
+        target_support_dirs.delete(aggregate_target.support_files_dir)
+      end
+
+      target_support_dirs.each { |dir| FileUtils.rm_rf(dir) }
 
       unless sandbox_state.deleted.empty?
         title_options = { :verbose_prefix => '-> '.red }
@@ -286,19 +301,11 @@ module Pod
       end
     end
 
-    # TODO: the file accessor should be initialized by the sandbox as they
-    #       created by the Pod source installer as well.
+    # @return [void] In this step we create the file accessors for the pod
+    #                targets.
     #
     def create_file_accessors
-      pod_targets.each do |pod_target|
-        pod_root = sandbox.pod_dir(pod_target.root_spec.name)
-        path_list = Sandbox::PathList.new(pod_root)
-        file_accessors = pod_target.specs.map do |spec|
-          Sandbox::FileAccessor.new(path_list, spec.consumer(pod_target.platform))
-        end
-        pod_target.file_accessors ||= []
-        pod_target.file_accessors.concat(file_accessors)
-      end
+      sandbox.create_file_accessors(pod_targets)
     end
 
     # Downloads, installs the documentation and cleans the sources of the Pods
@@ -393,67 +400,9 @@ module Pod
       end
     end
 
-    def verify_no_duplicate_framework_and_library_names
-      aggregate_targets.each do |aggregate_target|
-        aggregate_target.user_build_configurations.keys.each do |config|
-          pod_targets = aggregate_target.pod_targets_for_build_configuration(config)
-          file_accessors = pod_targets.flat_map(&:file_accessors)
-
-          frameworks = file_accessors.flat_map(&:vendored_frameworks).uniq.map(&:basename)
-          frameworks += pod_targets.select { |pt| pt.should_build? && pt.requires_frameworks? }.map(&:product_module_name)
-          verify_no_duplicate_names(frameworks, aggregate_target.label, 'frameworks')
-
-          libraries = file_accessors.flat_map(&:vendored_libraries).uniq.map(&:basename)
-          libraries += pod_targets.select { |pt| pt.should_build? && !pt.requires_frameworks? }.map(&:product_name)
-          verify_no_duplicate_names(libraries, aggregate_target.label, 'libraries')
-        end
-      end
-    end
-
-    def verify_no_duplicate_names(names, label, type)
-      duplicates = names.map { |n| n.to_s.downcase }.group_by { |f| f }.select { |_, v| v.size > 1 }.keys
-
-      unless duplicates.empty?
-        raise Informative, "The '#{label}' target has " \
-          "#{type} with conflicting names: #{duplicates.to_sentence}."
-      end
-    end
-
-    def verify_no_static_framework_transitive_dependencies
-      aggregate_targets.each do |aggregate_target|
-        next unless aggregate_target.requires_frameworks?
-
-        aggregate_target.user_build_configurations.keys.each do |config|
-          pod_targets = aggregate_target.pod_targets_for_build_configuration(config)
-
-          dependencies = pod_targets.select(&:should_build?).flat_map(&:dependencies)
-          dependended_upon_targets = pod_targets.select { |t| dependencies.include?(t.pod_name) && !t.should_build? }
-
-          static_libs = dependended_upon_targets.flat_map(&:file_accessors).flat_map(&:vendored_static_artifacts)
-          unless static_libs.empty?
-            raise Informative, "The '#{aggregate_target.label}' target has " \
-              "transitive dependencies that include static binaries: (#{static_libs.to_sentence})"
-          end
-        end
-      end
-    end
-
-    def verify_framework_usage
-      aggregate_targets.each do |aggregate_target|
-        next if aggregate_target.requires_frameworks?
-
-        aggregate_target.user_build_configurations.keys.each do |config|
-          pod_targets = aggregate_target.pod_targets_for_build_configuration(config)
-
-          swift_pods = pod_targets.select(&:uses_swift?)
-          unless swift_pods.empty?
-            raise Informative, 'Pods written in Swift can only be integrated as frameworks; ' \
-              'add `use_frameworks!` to your Podfile or target to opt into using it. ' \
-              "The Swift #{swift_pods.size == 1 ? 'Pod being used is' : 'Pods being used are'}: " +
-              swift_pods.map(&:name).to_sentence
-          end
-        end
-      end
+    def validate_targets
+      validator = Xcode::TargetValidator.new(aggregate_targets, pod_targets)
+      validator.validate!
     end
 
     # Runs the registered callbacks for the plugins pre install hooks.

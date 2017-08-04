@@ -4,6 +4,7 @@ module Pod
       # The {PodsProjectGenerator} handles generation of the 'Pods/Pods.xcodeproj'
       #
       class PodsProjectGenerator
+        require 'cocoapods/installer/pods_project_integrator/pod_target_integrator'
         require 'cocoapods/installer/xcode/pods_project_generator/target_installer'
         require 'cocoapods/installer/xcode/pods_project_generator/pod_target_installer'
         require 'cocoapods/installer/xcode/pods_project_generator/file_references_installer'
@@ -62,6 +63,7 @@ module Pod
           prepare
           install_file_references
           install_libraries
+          integrate_test_targets
           set_target_dependencies
         end
 
@@ -73,7 +75,13 @@ module Pod
             if installation_options.deterministic_uuids?
               UI.message('- Generating deterministic UUIDs') { project.predictabilize_uuids }
             end
-            project.recreate_user_schemes(false)
+            library_product_types = [:framework, :dynamic_library, :static_library]
+            project.recreate_user_schemes(false) do |scheme, target|
+              next unless library_product_types.include? target.symbol_type
+              pod_target = pod_targets.find { |pt| pt.native_target == target }
+              next if pod_target.nil? || pod_target.test_native_targets.empty?
+              pod_target.test_native_targets.each { |test_native_target| scheme.add_test_target(test_native_target) }
+            end
             project.save
           end
         end
@@ -86,6 +94,11 @@ module Pod
           development_pod_targets.select(&:should_build?).each do |pod_target|
             next unless share_scheme_for_development_pod?(pod_target.pod_name)
             Xcodeproj::XCScheme.share_scheme(project.path, pod_target.label)
+            if pod_target.contains_test_specifications?
+              pod_target.supported_test_types.each do |test_type|
+                Xcodeproj::XCScheme.share_scheme(project.path, pod_target.test_target_label(test_type))
+              end
+            end
           end
         end
 
@@ -164,6 +177,17 @@ module Pod
           end
         end
 
+        def integrate_test_targets
+          pod_targets_with_test_targets = pod_targets.reject { |pt| pt.test_native_targets.empty? }
+          unless pod_targets_with_test_targets.empty?
+            UI.message '- Integrating test targets' do
+              pod_targets_with_test_targets.each do |pod_target|
+                Pod::Installer::PodTargetIntegrator.new(pod_target).integrate!
+              end
+            end
+          end
+        end
+
         def add_system_framework_dependencies
           # @TODO: Add Specs
           pod_targets.sort_by(&:name).each do |pod_target|
@@ -193,27 +217,17 @@ module Pod
               configure_app_extension_api_only_for_target(aggregate_target) if is_app_extension
 
               unless pod_target.should_build?
-                pod_target.resource_bundle_targets.each do |resource_bundle_target|
-                  aggregate_target.native_target.add_dependency(resource_bundle_target)
-                end
-
+                add_resource_bundles_to_native_target(pod_target, aggregate_target.native_target)
+                add_pod_target_test_dependencies(pod_target, frameworks_group)
                 next
               end
 
               aggregate_target.native_target.add_dependency(pod_target.native_target)
               configure_app_extension_api_only_for_target(pod_target) if is_app_extension
 
-              pod_target.dependent_targets.each do |pod_dependency_target|
-                next unless pod_dependency_target.should_build?
-                pod_target.native_target.add_dependency(pod_dependency_target.native_target)
-                configure_app_extension_api_only_for_target(pod_dependency_target) if is_app_extension
+              add_dependent_targets_to_native_target(pod_target.dependent_targets, pod_target.native_target, is_app_extension, pod_target.requires_frameworks?, frameworks_group)
 
-                if pod_target.requires_frameworks?
-                  product_ref = frameworks_group.files.find { |f| f.path == pod_dependency_target.product_name } ||
-                    frameworks_group.new_product_ref_for_target(pod_dependency_target.product_basename, pod_dependency_target.product_type)
-                  pod_target.native_target.frameworks_build_phase.add_file_reference(product_ref, true)
-                end
-              end
+              add_pod_target_test_dependencies(pod_target, frameworks_group)
             end
           end
         end
@@ -250,6 +264,37 @@ module Pod
         # @! group Private Helpers
 
         private
+
+        def add_pod_target_test_dependencies(pod_target, frameworks_group)
+          test_dependent_targets = pod_target.all_test_dependent_targets
+          pod_target.test_native_targets.each do |test_native_target|
+            test_dependent_targets.reject(&:should_build?).each do |test_dependent_target|
+              add_resource_bundles_to_native_target(test_dependent_target, test_native_target)
+            end
+            add_dependent_targets_to_native_target(test_dependent_targets, test_native_target, false, pod_target.requires_frameworks?, frameworks_group)
+          end
+        end
+
+        def add_dependent_targets_to_native_target(dependent_targets, native_target, is_app_extension, requires_frameworks, frameworks_group)
+          dependent_targets.each do |pod_dependency_target|
+            next unless pod_dependency_target.should_build?
+            native_target.add_dependency(pod_dependency_target.native_target)
+            configure_app_extension_api_only_for_target(pod_dependency_target) if is_app_extension
+
+            if requires_frameworks
+              product_ref = frameworks_group.files.find { |f| f.path == pod_dependency_target.product_name } ||
+                  frameworks_group.new_product_ref_for_target(pod_dependency_target.product_basename, pod_dependency_target.product_type)
+              native_target.frameworks_build_phase.add_file_reference(product_ref, true)
+            end
+          end
+        end
+
+        def add_resource_bundles_to_native_target(dependent_target, native_target)
+          resource_bundle_targets = dependent_target.resource_bundle_targets + dependent_target.test_resource_bundle_targets
+          resource_bundle_targets.each do |resource_bundle_target|
+            native_target.add_dependency(resource_bundle_target)
+          end
+        end
 
         # Sets the APPLICATION_EXTENSION_API_ONLY build setting to YES for all
         # configurations of the given target

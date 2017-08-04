@@ -19,19 +19,23 @@ module Pod
             UI.message "- Installing target `#{target.name}` #{target.platform}" do
               add_target
               create_support_files_dir
+              add_test_targets if target.contains_test_specifications?
               add_resources_bundle_targets
               add_files_to_build_phases
               create_xcconfig_file
+              create_test_xcconfig_files if target.contains_test_specifications?
               if target.requires_frameworks?
                 create_info_plist_file
                 create_module_map
                 create_umbrella_header do |generator|
+                  file_accessors = target.file_accessors
+                  file_accessors = file_accessors.reject { |f| f.spec.test_specification? } if target.contains_test_specifications?
                   generator.imports += if header_mappings_dir
-                                         target.file_accessors.flat_map(&:public_headers).map do |pathname|
+                                         file_accessors.flat_map(&:public_headers).map do |pathname|
                                            pathname.relative_path_from(header_mappings_dir)
                                          end
                                        else
-                                         target.file_accessors.flat_map(&:public_headers).map(&:basename)
+                                         file_accessors.flat_map(&:public_headers).map(&:basename)
                                        end
                 end
                 create_build_phase_to_symlink_header_folders
@@ -58,6 +62,8 @@ module Pod
             settings['CODE_SIGN_IDENTITY[sdk=appletvos*]'] = ''
             settings['CODE_SIGN_IDENTITY[sdk=iphoneos*]'] = ''
             settings['CODE_SIGN_IDENTITY[sdk=watchos*]'] = ''
+
+            settings['SWIFT_ACTIVE_COMPILATION_CONDITIONS'] = '$(inherited) '
 
             if target.swift_version
               settings['SWIFT_VERSION'] = target.swift_version
@@ -128,6 +134,7 @@ module Pod
             target.file_accessors.each do |file_accessor|
               consumer = file_accessor.spec_consumer
 
+              native_target = target.native_target_for_spec(consumer.spec)
               headers = file_accessor.headers
               public_headers = file_accessor.public_headers
               private_headers = file_accessor.private_headers
@@ -145,10 +152,10 @@ module Pod
 
               header_file_refs = project_file_references_array(headers, 'header')
               native_target.add_file_references(header_file_refs) do |build_file|
-                add_header(build_file, public_headers, private_headers)
+                add_header(build_file, public_headers, private_headers, native_target)
               end
 
-              other_file_refs = other_source_files.map { |sf| project.reference_for_path(sf) }
+              other_file_refs = project_file_references_array(other_source_files, 'other source')
               native_target.add_file_references(other_file_refs, nil)
 
               next unless target.requires_frameworks?
@@ -157,6 +164,43 @@ module Pod
                 native_target.add_file_references(compile_phase_refs, nil)
                 native_target.add_resources(resource_phase_refs)
               end
+            end
+          end
+
+          # Adds the test targets for the library to the Pods project with the
+          # appropriate build configurations.
+          #
+          # @return [void]
+          #
+          def add_test_targets
+            target.supported_test_types.each do |test_type|
+              product_type = target.product_type_for_test_type(test_type)
+              name = target.test_target_label(test_type)
+              platform_name = target.platform.name
+              language = target.uses_swift? ? :swift : :objc
+              native_test_target = project.new_target(product_type, name, platform_name, deployment_target, nil, language)
+              native_test_target.product_reference.name = name
+
+              target.user_build_configurations.each do |bc_name, type|
+                native_test_target.add_build_configuration(bc_name, type)
+              end
+
+              native_test_target.build_configurations.each do |configuration|
+                configuration.build_settings.merge!(custom_build_settings)
+                # target_installer will automatically add an empty `OTHER_LDFLAGS`. For test
+                # targets those are set via a test xcconfig file instead.
+                configuration.build_settings.delete('OTHER_LDFLAGS')
+                # target_installer will automatically set the product name to the module name if the target
+                # requires frameworks. For tests we always use the test target name as the product name
+                # irrelevant to whether we use frameworks or not.
+                configuration.build_settings['PRODUCT_NAME'] = name
+              end
+
+              # Test native targets also need frameworks and resources to be copied over to their xctest bundle.
+              create_test_target_embed_frameworks_script(test_type)
+              create_test_target_copy_resources_script(test_type)
+
+              target.test_native_targets << native_test_target
             end
           end
 
@@ -184,12 +228,19 @@ module Pod
                   bundle_target.add_resources(resource_phase_refs + compile_phase_refs)
                 end
 
+                native_target = target.native_target_for_spec(file_accessor.spec_consumer.spec)
                 target.user_build_configurations.each do |bc_name, type|
                   bundle_target.add_build_configuration(bc_name, type)
                 end
                 bundle_target.deployment_target = deployment_target
 
-                target.resource_bundle_targets << bundle_target
+                test_specification = file_accessor.spec.test_specification?
+
+                if test_specification
+                  target.test_resource_bundle_targets << bundle_target
+                else
+                  target.resource_bundle_targets << bundle_target
+                end
 
                 if target.should_build?
                   native_target.add_dependency(bundle_target)
@@ -203,14 +254,19 @@ module Pod
                 path.dirname.mkdir unless path.dirname.exist?
                 info_plist_path = path.dirname + "ResourceBundle-#{bundle_name}-#{path.basename}"
                 generator = Generator::InfoPlistFile.new(target, :bundle_package_type => :bndl)
-                generator.save_as(info_plist_path)
+                update_changed_file(generator, info_plist_path)
                 add_file_to_support_group(info_plist_path)
 
                 bundle_target.build_configurations.each do |c|
                   c.build_settings['PRODUCT_NAME'] = bundle_name
                   relative_info_plist_path = info_plist_path.relative_path_from(sandbox.root)
                   c.build_settings['INFOPLIST_FILE'] = relative_info_plist_path.to_s
-                  c.build_settings['CONFIGURATION_BUILD_DIR'] = target.configuration_build_dir('$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)')
+                  # Do not set the CONFIGURATION_BUILD_DIR for resource bundles that are only meant for test targets.
+                  # This is because the test target itself also does not set this configuration build dir and it expects
+                  # all bundles to be copied from the default path.
+                  unless test_specification
+                    c.build_settings['CONFIGURATION_BUILD_DIR'] = target.configuration_build_dir('$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)')
+                  end
 
                   # Set the correct device family for this bundle, based on the platform
                   device_family_by_platform = {
@@ -219,7 +275,7 @@ module Pod
                     :watchos => '1,2' # The device family for watchOS is 4, but Xcode creates watchkit-compatible bundles as 1,2
                   }
 
-                  if family = device_family_by_platform[target.platform.name]
+                  if (family = device_family_by_platform[target.platform.name])
                     c.build_settings['TARGETED_DEVICE_FAMILY'] = family
                   end
                 end
@@ -234,19 +290,82 @@ module Pod
           def create_xcconfig_file
             path = target.xcconfig_path
             xcconfig_gen = Generator::XCConfig::PodXCConfig.new(target)
-            xcconfig_gen.save_as(path)
+            update_changed_file(xcconfig_gen, path)
             xcconfig_file_ref = add_file_to_support_group(path)
 
             native_target.build_configurations.each do |c|
               c.base_configuration_reference = xcconfig_file_ref
             end
 
-            # also apply the private config to resource targets
-            target.resource_bundle_targets.each do |rsrc_target|
-              rsrc_target.build_configurations.each do |rsrc_bc|
-                rsrc_bc.base_configuration_reference = xcconfig_file_ref
+            # also apply the private config to resource bundle targets.
+            apply_xcconfig_file_ref_to_resource_bundle_targets(target.resource_bundle_targets, xcconfig_file_ref)
+          end
+
+          # Generates the contents of the xcconfig file used for each test target type and saves it to disk.
+          #
+          # @return [void]
+          #
+          def create_test_xcconfig_files
+            target.supported_test_types.each do |test_type|
+              path = target.xcconfig_path(test_type.to_s)
+              xcconfig_gen = Generator::XCConfig::PodXCConfig.new(target, true)
+              update_changed_file(xcconfig_gen, path)
+              xcconfig_file_ref = add_file_to_support_group(path)
+
+              target.test_native_targets.each do |test_target|
+                test_target.build_configurations.each do |test_target_bc|
+                  test_target_swift_debug_hack(test_target_bc)
+                  test_target_bc.base_configuration_reference = xcconfig_file_ref
+                end
               end
+
+              # also apply the private config to resource bundle test targets.
+              apply_xcconfig_file_ref_to_resource_bundle_targets(target.test_resource_bundle_targets, xcconfig_file_ref)
             end
+          end
+
+          # Creates a script that copies the resources to the bundle of the test target.
+          #
+          # @param [Symbol] test_type
+          #        The test type to create the script for.
+          #
+          # @return [void]
+          #
+          def create_test_target_copy_resources_script(test_type)
+            path = target.copy_resources_script_path_for_test_type(test_type)
+            pod_targets = target.all_test_dependent_targets
+            resource_paths_by_config = { 'Debug' => pod_targets.flat_map(&:resource_paths) }
+            generator = Generator::CopyResourcesScript.new(resource_paths_by_config, target.platform)
+            update_changed_file(generator, path)
+            add_file_to_support_group(path)
+          end
+
+          # Creates a script that embeds the frameworks to the bundle of the test target.
+          #
+          # @param [Symbol] test_type
+          #        The test type to create the script for.
+          #
+          # @return [void]
+          #
+          def create_test_target_embed_frameworks_script(test_type)
+            path = target.embed_frameworks_script_path_for_test_type(test_type)
+            pod_targets = target.all_test_dependent_targets
+            framework_paths_by_config = { 'Debug' => pod_targets.flat_map(&:framework_paths) }
+            generator = Generator::EmbedFrameworksScript.new(framework_paths_by_config)
+            update_changed_file(generator, path)
+            add_file_to_support_group(path)
+          end
+
+          # Manually add `libswiftSwiftOnoneSupport.dylib` as it seems there is an issue with tests that do not include it for Debug configurations.
+          # Possibly related to Swift module optimization.
+          #
+          # @return [void]
+          #
+          def test_target_swift_debug_hack(test_target_bc)
+            return unless test_target_bc.debug?
+            return unless [target, *target.recursive_dependent_targets].any?(&:uses_swift?)
+            ldflags = test_target_bc.build_settings['OTHER_LDFLAGS'] ||= '$(inherited)'
+            ldflags << ' -lswiftSwiftOnoneSupport'
           end
 
           # Creates a build phase which links the versioned header folders
@@ -278,7 +397,7 @@ module Pod
           def create_prefix_header
             path = target.prefix_header_path
             generator = Generator::PrefixHeader.new(target.file_accessors, target.platform)
-            generator.save_as(path)
+            update_changed_file(generator, path)
             add_file_to_support_group(path)
 
             native_target.build_configurations.each do |c|
@@ -360,11 +479,21 @@ module Pod
             group.new_file(path)
           end
 
+          def apply_xcconfig_file_ref_to_resource_bundle_targets(resource_bundle_targets, xcconfig_file_ref)
+            resource_bundle_targets.each do |rsrc_target|
+              rsrc_target.build_configurations.each do |rsrc_bc|
+                rsrc_bc.base_configuration_reference = xcconfig_file_ref
+              end
+            end
+          end
+
           def create_module_map
             return super unless custom_module_map
             path = target.module_map_path
             UI.message "- Copying module map file to #{UI.path(path)}" do
-              FileUtils.cp(custom_module_map, path)
+              unless path.exist? && FileUtils.identical?(custom_module_map, path)
+                FileUtils.cp(custom_module_map, path)
+              end
               add_file_to_support_group(path)
 
               native_target.build_configurations.each do |c|
@@ -398,7 +527,7 @@ module Pod
                                    end
           end
 
-          def add_header(build_file, public_headers, private_headers)
+          def add_header(build_file, public_headers, private_headers, native_target)
             file_ref = build_file.file_ref
             acl = if public_headers.include?(file_ref.real_path)
                     'Public'

@@ -71,8 +71,9 @@ module Pod
 
           XCConfigHelper.add_target_specific_settings(target, @xcconfig)
 
-          generate_vendored_build_settings
-          generate_other_ld_flags
+          targets = pod_targets + target.search_paths_aggregate_targets.flat_map(&:pod_targets)
+          XCConfigHelper.generate_vendored_build_settings(target, targets, @xcconfig)
+          XCConfigHelper.generate_other_ld_flags(target, pod_targets, @xcconfig)
 
           # TODO: Need to decide how we are going to ensure settings like these
           # are always excluded from the user's project.
@@ -84,7 +85,9 @@ module Pod
           # update the runpath search paths.
           vendored_dynamic_artifacts = pod_targets.flat_map(&:file_accessors).flat_map(&:vendored_dynamic_artifacts)
 
-          generate_ld_runpath_search_paths if target.requires_frameworks? || vendored_dynamic_artifacts.count > 0
+          symbol_type = target.user_targets.map(&:symbol_type).uniq.first
+          test_bundle = symbol_type == :octest_bundle || symbol_type == :unit_test_bundle || symbol_type == :ui_test_bundle
+          XCConfigHelper.generate_ld_runpath_search_paths(target, target.requires_host_target?, test_bundle, @xcconfig) if target.requires_frameworks? || vendored_dynamic_artifacts.count > 0
 
           @xcconfig
         end
@@ -174,69 +177,6 @@ module Pod
             @xcconfig.merge! XCConfigHelper.settings_for_dependent_targets(nil, search_paths_target.pod_targets)
             @xcconfig.merge!(generator.settings_to_import_pod_targets)
           end
-        end
-
-        # Add custom build settings and required build settings to link to
-        # vendored libraries and frameworks.
-        #
-        # @note
-        #   In case of generated pod targets, which require frameworks, the
-        #   vendored frameworks and libraries are already linked statically
-        #   into the framework binary and must not be linked again to the
-        #   user target.
-        #
-        def generate_vendored_build_settings
-          targets = pod_targets + target.search_paths_aggregate_targets.flat_map(&:pod_targets)
-
-          targets.each do |pod_target|
-            unless pod_target.should_build? && pod_target.requires_frameworks?
-              XCConfigHelper.add_settings_for_file_accessors_of_target(target, pod_target, @xcconfig)
-            end
-          end
-        end
-
-        # Add pod target to list of frameworks / libraries that are linked
-        # with the user’s project.
-        #
-        def generate_other_ld_flags
-          other_ld_flags = pod_targets.select(&:should_build?).map do |pod_target|
-            if pod_target.requires_frameworks?
-              %(-framework "#{pod_target.product_basename}")
-            else
-              %(-l "#{pod_target.product_basename}") if XCConfigHelper.links_dependency?(target, pod_target)
-            end
-          end
-
-          @xcconfig.merge!('OTHER_LDFLAGS' => other_ld_flags.compact.join(' '))
-        end
-
-        # Ensure to add the default linker run path search paths as they could
-        # be not present due to being historically absent in the project or
-        # target template or just being removed by being superficial when
-        # linking third-party dependencies exclusively statically. This is not
-        # something a project needs specifically for the integration with
-        # CocoaPods, but makes sure that it is self-contained for the given
-        # constraints.
-        #
-        def generate_ld_runpath_search_paths
-          ld_runpath_search_paths = ['$(inherited)']
-          if target.platform.symbolic_name == :osx
-            ld_runpath_search_paths << "'@executable_path/../Frameworks'"
-            symbol_type = target.user_targets.map(&:symbol_type).uniq.first
-            ld_runpath_search_paths << \
-              if symbol_type == :unit_test_bundle
-                "'@loader_path/../Frameworks'"
-              else
-                "'@loader_path/Frameworks'"
-              end
-          else
-            ld_runpath_search_paths << [
-              "'@executable_path/Frameworks'",
-              "'@loader_path/Frameworks'",
-            ]
-            ld_runpath_search_paths << "'@executable_path/../../Frameworks'" if target.requires_host_target?
-          end
-          @xcconfig.merge!('LD_RUNPATH_SEARCH_PATHS' => ld_runpath_search_paths.join(' '))
         end
 
         private

@@ -45,13 +45,15 @@ module Pod
         #         the target, which is used to check if the ARC compatibility
         #         flag is required.
         #
-        # @return [String] the default linker flags. `-ObjC` is always included
-        #         while `-fobjc-arc` is included only if requested in the
-        #         Podfile.
+        # @param  [Boolean] include_objc_flag
+        #         whether to include `-ObjC` in the other linker flags
         #
-        def self.default_ld_flags(target, includes_static_libraries = false)
+        # @return [String] the default linker flags. `-ObjC` is optionally included depending
+        #         on the target while `-fobjc-arc` is included only if requested in the Podfile.
+        #
+        def self.default_ld_flags(target, include_objc_flag = false)
           ld_flags = ''
-          ld_flags << '-ObjC' if includes_static_libraries
+          ld_flags << '-ObjC' if include_objc_flag
           if target.podfile.set_arc_compatibility_flag? &&
               target.spec_consumers.any?(&:requires_arc?)
             ld_flags << ' -fobjc-arc'
@@ -210,7 +212,7 @@ module Pod
           name = File.basename(library_path, extension).sub(/\Alib/, '')
           dirname = '${PODS_ROOT}/' + library_path.dirname.relative_path_from(sandbox_root).to_s
           build_settings = {
-            'LIBRARY_SEARCH_PATHS' => '$(inherited) ' + quote([dirname]),
+            'LIBRARY_SEARCH_PATHS' => quote([dirname]),
           }
           build_settings['OTHER_LDFLAGS'] = "-l#{name}" if include_other_ldflags
           xcconfig.merge!(build_settings)
@@ -263,9 +265,12 @@ module Pod
         # @param  [Array<PodTarget>] dependent_targets
         #         The pod targets the given target depends on.
         #
+        # @param  [Boolean] test_xcconfig
+        #         Whether the settings for dependent targets are being generated for a test xcconfig or not.
+        #
         # @return [Hash<String, String>] the settings
         #
-        def self.settings_for_dependent_targets(target, dependent_targets)
+        def self.settings_for_dependent_targets(target, dependent_targets, test_xcconfig = false)
           dependent_targets = dependent_targets.select(&:should_build?)
 
           # Alias build dirs to avoid recursive definitions for pod targets and depending
@@ -275,8 +280,8 @@ module Pod
             CONFIGURATION_BUILD_DIR_VARIABLE[1..-1] => "#{BUILD_DIR_VARIABLE}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)",
           }
 
-          # Scope pod targets
-          if target.respond_to?(:configuration_build_dir)
+          # Scope pod targets as long as they are not test targets.
+          if !test_xcconfig && target.respond_to?(:configuration_build_dir)
             build_settings['CONFIGURATION_BUILD_DIR'] = target.configuration_build_dir(CONFIGURATION_BUILD_DIR_VARIABLE)
           end
 
@@ -294,6 +299,100 @@ module Pod
             build_settings['LIBRARY_SEARCH_PATHS']   = XCConfigHelper.quote(library_search_paths.uniq)
           end
           build_settings
+        end
+
+        # Add custom build settings and required build settings to link to
+        # vendored libraries and frameworks.
+        #
+        # @param  [AggregateTarget] aggregate_target
+        #         The aggregate target, may be nil.
+        #
+        # @param  [Array<PodTarget] pod_targets
+        #         The pod targets to add the vendored build settings for.
+        #
+        # @param  [Xcodeproj::Config] xcconfig
+        #         The xcconfig to edit.
+        #
+        # @note
+        #   In case of generated pod targets, which require frameworks, the
+        #   vendored frameworks and libraries are already linked statically
+        #   into the framework binary and must not be linked again to the
+        #   user target.
+        #
+        def self.generate_vendored_build_settings(aggregate_target, pod_targets, xcconfig)
+          pod_targets.each do |pod_target|
+            unless pod_target.should_build? && pod_target.requires_frameworks?
+              XCConfigHelper.add_settings_for_file_accessors_of_target(aggregate_target, pod_target, xcconfig)
+            end
+          end
+        end
+
+        # Ensure to add the default linker run path search paths as they could
+        # be not present due to being historically absent in the project or
+        # target template or just being removed by being superficial when
+        # linking third-party dependencies exclusively statically. This is not
+        # something a project needs specifically for the integration with
+        # CocoaPods, but makes sure that it is self-contained for the given
+        # constraints.
+        #
+        # @param [Target] target
+        #        The target, this can be an aggregate target or a pod target.
+        #
+        # @param [Boolean] requires_host_target
+        #        If this target requires a host target
+        #
+        # @param [Boolean] test_bundle
+        #        Whether this is a test bundle or not. This has an effect when the platform is `osx` and changes
+        #        the runtime search paths accordingly.
+        #
+        # @param [Xcodeproj::Config] xcconfig
+        #        The xcconfig to edit.
+        #
+        # @return [void]
+        #
+        def self.generate_ld_runpath_search_paths(target, requires_host_target, test_bundle, xcconfig)
+          ld_runpath_search_paths = ['$(inherited)']
+          if target.platform.symbolic_name == :osx
+            ld_runpath_search_paths << "'@executable_path/../Frameworks'"
+            ld_runpath_search_paths << \
+              if test_bundle
+                "'@loader_path/../Frameworks'"
+              else
+                "'@loader_path/Frameworks'"
+              end
+          else
+            ld_runpath_search_paths << [
+              "'@executable_path/Frameworks'",
+              "'@loader_path/Frameworks'",
+            ]
+            ld_runpath_search_paths << "'@executable_path/../../Frameworks'" if requires_host_target
+          end
+          xcconfig.merge!('LD_RUNPATH_SEARCH_PATHS' => ld_runpath_search_paths.join(' '))
+        end
+
+        # Add pod target to list of frameworks / libraries that are linked
+        # with the user’s project.
+        #
+        # @param  [AggregateTarget] aggregate_target
+        #         The aggregate target, may be nil.
+        #
+        # @param  [Array<PodTarget] pod_targets
+        #         The pod targets to add the vendored build settings for.
+        #
+        # @param  [Xcodeproj::Config] xcconfig
+        #         The xcconfig to edit.
+        #
+        # @return [void]
+        #
+        def self.generate_other_ld_flags(aggregate_target, pod_targets, xcconfig)
+          other_ld_flags = pod_targets.select(&:should_build?).map do |pod_target|
+            if pod_target.requires_frameworks?
+              %(-framework "#{pod_target.product_basename}")
+            elsif XCConfigHelper.links_dependency?(aggregate_target, pod_target)
+              %(-l "#{pod_target.product_basename}")
+            end
+          end
+          xcconfig.merge!('OTHER_LDFLAGS' => other_ld_flags.compact.join(' '))
         end
 
         # Checks if the given target requires language specific settings and

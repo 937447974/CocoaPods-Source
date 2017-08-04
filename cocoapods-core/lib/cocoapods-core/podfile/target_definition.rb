@@ -23,6 +23,7 @@ module Pod
         @internal_hash = internal_hash || {}
         @parent = parent
         @children = []
+        @label = nil
         self.name ||= name
         if parent.is_a?(TargetDefinition)
           parent.children << self
@@ -106,13 +107,13 @@ module Pod
       #         name.
       #
       def label
-        if root? && name == 'Pods'
-          'Pods'
-        elsif exclusive? || parent.nil?
-          "Pods-#{name}"
-        else
-          "#{parent.label}-#{name}"
-        end
+        @label ||= if root? && name == 'Pods'
+                     'Pods'
+                   elsif exclusive? || parent.nil?
+                     "Pods-#{name}"
+                   else
+                     "#{parent.label}-#{name}"
+                   end
       end
 
       alias_method :to_s, :label
@@ -145,6 +146,7 @@ module Pod
       # @return [void]
       #
       def name=(name)
+        @label = nil
         set_hash_value('name', name)
       end
 
@@ -483,6 +485,7 @@ module Pod
       # @return [void]
       #
       def set_platform(name, target = nil)
+        name = :osx if name == :macos
         unless [:ios, :osx, :tvos, :watchos].include?(name)
           raise StandardError, "Unsupported platform `#{name}`. Platform " \
             'must be `:ios`, `:osx`, `:tvos`, or `:watchos`.'
@@ -851,8 +854,8 @@ module Pod
         requirements.pop if options.empty?
       end
 
-      # Removes :subspecs from the requirements list, and stores the pods
-      # with the given subspecs as dependencies.
+      # Removes :subspecs and :testspecs from the requirements list, and stores the pods
+      # with the given subspecs or test specs as dependencies.
       #
       # @param  [String] name
       #
@@ -867,9 +870,16 @@ module Pod
         return false unless options.is_a?(Hash)
 
         subspecs = options.delete(:subspecs)
+        test_specs = options.delete(:testspecs)
+
         subspecs.each do |ss|
           store_pod("#{name}/#{ss}", *requirements.dup)
         end if subspecs
+
+        test_specs.each do |ss|
+          store_pod("#{name}/#{ss}", *requirements.dup)
+        end if test_specs
+
         requirements.pop if options.empty?
         !subspecs.nil?
       end

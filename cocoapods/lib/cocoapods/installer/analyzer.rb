@@ -45,6 +45,9 @@ module Pod
 
         @update = false
         @allow_pre_downloads = true
+        @has_dependencies = true
+        @test_pod_target_analyzer_cache = {}
+        @test_pod_target_key = Struct.new(:name, :pod_targets)
       end
 
       # Performs the analysis.
@@ -151,6 +154,15 @@ module Pod
       #
       attr_accessor :allow_pre_downloads
       alias_method :allow_pre_downloads?, :allow_pre_downloads
+
+      # @return [Bool] Whether the analysis has dependencies and thus
+      #         sources must be configured.
+      #
+      # @note   This is used by the `pod lib lint` command to prevent
+      #         update of specs when not needed.
+      #
+      attr_accessor :has_dependencies
+      alias_method :has_dependencies?, :has_dependencies
 
       #-----------------------------------------------------------------------#
 
@@ -313,12 +325,12 @@ module Pod
         end
 
         unless embedded_targets_missing_hosts.empty?
-          embedded_targets_missing_hosts_product_types = embedded_targets_missing_hosts.map(&:user_targets).flatten.map(&:symbol_type).uniq
+          embedded_targets_missing_hosts_product_types = Set.new embedded_targets_missing_hosts.map(&:user_targets).flatten.map(&:symbol_type)
           #  If the targets missing hosts are only frameworks, then this is likely
           #  a project for doing framework development. In that case, just warn that
           #  the frameworks that these targets depend on won't be integrated anywhere
-          if embedded_targets_missing_hosts_product_types == [:framework]
-            UI.warn 'The Podfile contains framework targets, for which the Podfile does not contain host targets (targets which embed the framework).' \
+          if embedded_targets_missing_hosts_product_types.subset?(Set.new([:framework, :static_library]))
+            UI.warn 'The Podfile contains framework or static library targets, for which the Podfile does not contain host targets (targets which embed the framework).' \
               "\n" \
               'If this project is for doing framework development, you can ignore this message. Otherwise, add a target to the Podfile that embeds these frameworks to make this message go away (e.g. a test target).'
           else
@@ -357,7 +369,6 @@ module Pod
       #
       def generate_targets
         specs_by_target = result.specs_by_target.reject { |td, _| td.abstract? }
-        check_pod_target_swift_versions(specs_by_target)
         pod_targets = generate_pod_targets(specs_by_target)
         aggregate_targets = specs_by_target.keys.map do |target_definition|
           generate_target(target_definition, pod_targets)
@@ -418,44 +429,52 @@ module Pod
           end
         end
 
-        target.pod_targets = pod_targets.select do |pod_target|
-          pod_target.target_definitions.include?(target_definition)
-        end
+        target.pod_targets = filter_pod_targets_for_target_definition(pod_targets, target_definition)
 
         target
       end
 
-      # Verify that targets using a pod have the same swift version
+      # Returns a filtered list of pod targets that should or should not be part of the target definition. Pod targets
+      # used by tests only are filtered.
       #
-      # @param  [Hash{Podfile::TargetDefinition => Array<Specification>}] specs_by_target
-      #         the resolved specifications grouped by target.
+      # @param [Array<PodTarget>] pod_targets
+      #        the array of pod targets to check against
       #
-      # @note raises Informative if targets using a pod do not have
-      #       the same swift version
+      # @param [TargetDefinition] target_definition
+      #        the target definition to use as the base for filtering
       #
-      def check_pod_target_swift_versions(specs_by_target)
-        targets_by_spec = {}
-        specs_by_target.each do |target, specs|
-          specs.each do |spec|
-            (targets_by_spec[spec] ||= []) << target
-          end
+      # @return [Array<PodTarget>] the filtered list of pod targets.
+      #
+      def filter_pod_targets_for_target_definition(pod_targets, target_definition)
+        pod_targets.select do |pod_target|
+          pod_target.target_definitions.include?(target_definition) && !pod_target_test_only?(pod_target, pod_targets)
         end
+      end
 
-        error_message_for_target = lambda do |target|
-          "#{target.name} (Swift #{target.swift_version})"
+      # Returns true if a pod target is only used by other pod targets as a test dependency and therefore should
+      # not be included as part of the aggregate target.
+      #
+      # @param [PodTarget] pod_target
+      #        the pod target being queried
+      #
+      # @param [Array<PodTarget>] pod_targets
+      #        the array of pod targets to check against
+      #
+      # @return [Boolean] if the pod target is only referenced from test dependencies.
+      #
+      def pod_target_test_only?(pod_target, pod_targets)
+        name = pod_target.name
+        key = @test_pod_target_key.new(name, pod_targets)
+        if @test_pod_target_analyzer_cache.key?(key)
+          return @test_pod_target_analyzer_cache[key]
         end
-
-        error_messages = targets_by_spec.map do |spec, targets|
-          swift_targets = targets.reject { |target| target.swift_version.blank? }
-          next if swift_targets.empty? || swift_targets.uniq(&:swift_version).count == 1
-          target_errors = swift_targets.map(&error_message_for_target).join(', ')
-          "- #{spec.name} required by #{target_errors}"
-        end.compact
-
-        unless error_messages.empty?
-          raise Informative, 'The following pods are integrated into targets ' \
-            "that do not have the same Swift version:\n\n#{error_messages.join("\n")}"
+        source = pod_targets.any? do |pt|
+          pt.dependent_targets.map(&:name).include?(name)
         end
+        test = pod_targets.any? do |pt|
+          pt.test_dependent_targets.reject { |dpt| dpt.name == pt.name }.map(&:name).include?(name)
+        end
+        @test_pod_target_analyzer_cache[key] = !source && test
       end
 
       # Setup the pod targets for an aggregate target. Deduplicates resulting
@@ -492,15 +511,11 @@ module Pod
             hash[name] = values.sort_by { |pt| pt.specs.count }
           end
           pod_targets.each do |target|
-            dependencies = transitive_dependencies_for_specs(target.specs, target.platform, all_specs).group_by(&:root)
-            target.dependent_targets = dependencies.map do |root_spec, deps|
-              pod_targets_by_name[root_spec.name].find do |t|
-                next false if t.platform.symbolic_name != target.platform.symbolic_name ||
-                    t.requires_frameworks? != target.requires_frameworks?
-                spec_names = t.specs.map(&:name)
-                deps.all? { |dep| spec_names.include?(dep.name) }
-              end
-            end
+            dependencies = transitive_dependencies_for_specs(target.specs.reject(&:test_specification?), target.platform, all_specs).group_by(&:root)
+            test_dependencies = transitive_dependencies_for_specs(target.specs.select(&:test_specification?), target.platform, all_specs).group_by(&:root)
+            test_dependencies.delete_if { |k| dependencies.key? k }
+            target.dependent_targets = filter_dependencies(dependencies, pod_targets_by_name, target)
+            target.test_dependent_targets = filter_dependencies(test_dependencies, pod_targets_by_name, target)
           end
         else
           dedupe_cache = {}
@@ -512,8 +527,22 @@ module Pod
 
             pod_targets.each do |target|
               dependencies = transitive_dependencies_for_specs(target.specs, target.platform, specs).group_by(&:root)
+              test_dependencies = transitive_dependencies_for_specs(target.specs.select(&:test_specification?), target.platform, all_specs).group_by(&:root)
+              test_dependencies.delete_if { |k| dependencies.key? k }
               target.dependent_targets = pod_targets.reject { |t| dependencies[t.root_spec].nil? }
+              target.test_dependent_targets = pod_targets.reject { |t| test_dependencies[t.root_spec].nil? }
             end
+          end
+        end
+      end
+
+      def filter_dependencies(dependencies, pod_targets_by_name, target)
+        dependencies.map do |root_spec, deps|
+          pod_targets_by_name[root_spec.name].find do |t|
+            next false if t.platform.symbolic_name != target.platform.symbolic_name ||
+                t.requires_frameworks? != target.requires_frameworks?
+            spec_names = t.specs.map(&:name)
+            deps.all? { |dep| spec_names.include?(dep.name) }
           end
         end
       end
@@ -819,11 +848,11 @@ module Pod
 
           # Add any sources specified using the :source flag on individual dependencies.
           dependency_sources = podfile.dependencies.map(&:podspec_repo).compact
-
           all_dependencies_have_sources = dependency_sources.count == podfile.dependencies.count
+
           if all_dependencies_have_sources
             sources = dependency_sources
-          elsif sources.empty?
+          elsif has_dependencies? && sources.empty?
             sources = ['https://github.com/CocoaPods/Specs.git']
           else
             sources += dependency_sources

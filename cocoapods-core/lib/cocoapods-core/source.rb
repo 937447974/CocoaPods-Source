@@ -24,6 +24,7 @@ module Pod
     #
     def initialize(repo)
       @repo = Pathname(repo).expand_path
+      @versions_by_name = {}
       refresh_metadata
     end
 
@@ -160,7 +161,7 @@ module Pod
       raise ArgumentError, 'No name' unless name
       pod_dir = pod_path(name)
       return unless pod_dir.exist?
-      pod_dir.children.map do |v|
+      @versions_by_name[name] ||= pod_dir.children.map do |v|
         basename = v.basename.to_s
         begin
           Version.new(basename) if v.directory? && basename[0, 1] != '.'
@@ -330,8 +331,10 @@ module Pod
     #          Returns the list of changed spec paths.
     #
     def update(show_output)
+      return [] if unchanged_github_repo?
       prev_commit_hash = git_commit_hash
       update_git_repo(show_output)
+      @versions_by_name.clear
       refresh_metadata
       if version = metadata.last_compatible_version(Version.new(CORE_VERSION))
         tag = "v#{version}"
@@ -435,6 +438,11 @@ module Pod
       command = "git -C \"#{repo}\" " << args.join(' ')
       command << ' 2>&1' if include_error
       (`#{command}` || '').strip
+    end
+
+    def unchanged_github_repo?
+      return unless url =~ /github.com/
+      !GitHub.modified_since_commit(url, git_commit_hash)
     end
 
     #-------------------------------------------------------------------------#

@@ -4,6 +4,197 @@ To install or update CocoaPods see this [guide](http://docs.cocoapods.org/guides
 
 To install release candidates run `[sudo] gem install cocoapods --pre`
 
+## 1.3.0 (2017-08-02)
+
+##### Enhancements
+
+* None.  
+
+##### Bug Fixes
+
+* Ensure transitive dependencies are linked to test targets  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6917](https://github.com/CocoaPods/CocoaPods/pull/6917)
+
+* Properly install pod targets with test specs within subspecs  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6915](https://github.com/CocoaPods/CocoaPods/pull/6915)
+
+* Add `--skip-tests` support `push` to push command  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6893](https://github.com/CocoaPods/CocoaPods/pull/6893)
+
+## 1.3.0.rc.1 (2017-07-27)
+
+##### Enhancements
+
+* None.  
+
+##### Bug Fixes
+
+* Cache result of resource and framework paths  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6893](https://github.com/CocoaPods/CocoaPods/pull/6893)
+
+* Ensure source urls are set when spec has subspecs with dependencies  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6888](https://github.com/CocoaPods/CocoaPods/pull/6888)
+
+## 1.3.0.beta.3 (2017-07-19)
+
+##### Enhancements
+
+* Protect rsync tmp files from being deleted if two targets sync at the same time  
+  [Justin Martin](https://github.com/justinseanmartin)
+  [#6873](https://github.com/CocoaPods/CocoaPods/pull/6873)
+
+* Include test schemes within library schemes  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6765](https://github.com/CocoaPods/CocoaPods/issues/6765)
+
+* Truncate extra groups in Development Pods when they are parents of all files  
+  [Eric Amorde](https://github.com/amorde)
+  [#6814](https://github.com/CocoaPods/CocoaPods/pull/6814)
+
+* Do not re-write generated files that have not changed  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [dingjingpisces2015](https://github.com/dingjingpisces2015)
+  [#6825](https://github.com/CocoaPods/CocoaPods/pull/6825)
+
+##### Bug Fixes
+
+* Set the test xcconfig file to resource bundles used only by tests  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6886](https://github.com/CocoaPods/CocoaPods/pull/6886)
+
+* Integrate test targets to embed frameworks and resources  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6828](https://github.com/CocoaPods/CocoaPods/pull/6828)
+
+* Ensure resource bundle and test dependencies are set for test native targets  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6829](https://github.com/CocoaPods/CocoaPods/pull/6829)
+
+* Provide a better error message when references are missing for non-source files
+  [David Airapetyan](https://github.com/davidair)
+  [#4887](https://github.com/CocoaPods/CocoaPods/issues/4887)
+
+* Select unique module_name(s) across host target's and embedded targets' pod targets  
+  [Anand Biligiri](https://github.com/abiligiri)
+  [#6711](https://github.com/CocoaPods/CocoaPods/issues/6711)
+
+## 1.3.0.beta.2 (2017-06-22)
+
+##### Enhancements
+
+* Add inputs and outputs for resources script phase  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6806](https://github.com/CocoaPods/CocoaPods/pull/6806)
+
+* Simplify logic around framework input and output paths  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6803](https://github.com/CocoaPods/CocoaPods/pull/6803)
+
+* Add inputs and outputs to check manifest lock and embed framework script phases  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6797](https://github.com/CocoaPods/CocoaPods/issues/6797)
+
+##### Bug Fixes
+
+* Remove 0.34 migration for a small boost in `pod install` time  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6783](hhttps://github.com/CocoaPods/CocoaPods/pull/6783)
+
+* Use a cache when figuring out if a pod target is test only  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6787](https://github.com/CocoaPods/CocoaPods/pull/6787)
+
+## 1.3.0.beta.1 (2017-06-06)
+
+##### Enhancements
+
+* Add validator support to run test specs during lint  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6753](https://github.com/CocoaPods/CocoaPods/pull/6753)
+
+* Fix to include proper runtime search paths for test native targets  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6727](https://github.com/CocoaPods/CocoaPods/pull/6727)
+
+* Aggregate targets should not include pod targets only used by tests  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6726](https://github.com/CocoaPods/CocoaPods/pull/6726)
+
+* Add support for test target creation in the pods project generator  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6703](https://github.com/CocoaPods/CocoaPods/pull/6703) 
+
+* Copy dSYM for vendored frameworks.  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#1698](https://github.com/CocoaPods/CocoaPods/issues/1698) 
+
+* Prevents need for .swift-version file in Objective-C pods  
+  [Austin Emmons](https://github.com/atreat)
+  [#6742](https://github.com/CocoaPods/CocoaPods/issues/6742) 
+
+* Add a ipc command `podfile_json` converts a Podfile to JSON  
+  [Dacaiguoguo](https://github.com/dacaiguoguogmail)
+  [#6779](https://github.com/CocoaPods/CocoaPods/pull/6779)
+
+##### Bug Fixes
+
+* Link `swiftSwiftOnoneSupport` for test xcconfigs  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6769](https://github.com/CocoaPods/CocoaPods/pull/6769)
+
+* Do not double add search paths to test xcconfig from parent  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6768](https://github.com/CocoaPods/CocoaPods/pull/6768)
+
+* Ensure product name for tests is not overridden by custom build settings  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6766](https://github.com/CocoaPods/CocoaPods/pull/6766)
+
+* Do not use the same product name for test targets  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6762](https://github.com/CocoaPods/CocoaPods/pull/6762)
+
+* Use unique temp folder during lint for parallel execution    
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#5117](https://github.com/CocoaPods/CocoaPods/issues/5117)
+
+* Stop adding `$(inherited)` for every static library linked  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6756](https://github.com/CocoaPods/CocoaPods/pull/6756)
+
+* Settings for dependent targets should include the parent target for test xcconfigs  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6755](https://github.com/CocoaPods/CocoaPods/pull/6755)
+
+* Only check for valid Swift version for pod targets that use Swift  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6733](https://github.com/CocoaPods/CocoaPods/pull/6733) 
+
+* Fix pod install error from 1.2.1 when working with static lib-only projects.  
+  [Ben Asher](https://github.com/benasher44)
+  [#6673](https://github.com/CocoaPods/CocoaPods/issues/6673)
+
+* Use `git!` when executing `push` command in order to raise informative and set exit code.  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#6700](https://github.com/CocoaPods/CocoaPods/pull/6700) 
+
+* Make copy resources echoes always return true to work around issue where Xcode stops handling build script output greater than ~440 characters (rdar://30607704).  
+  [postmechanical](https://github.com/postmechanical)
+  [#6595](https://github.com/CocoaPods/CocoaPods/issues/6595)
+
+* Inherit pod defined values for `SWIFT_ACTIVE_COMPILATION_CONDITIONS`.    
+  [Louis D'hauwe](https://github.com/louisdh)
+  [#6629](https://github.com/CocoaPods/CocoaPods/pull/6629)
+  
+* Delete extraneous files in rsync destination.  
+  [jgavris](https://github.com/jgavris)
+  [#6694](https://github.com/CocoaPods/CocoaPods/pull/6694)
+  
 ## 1.2.1 (2017-04-11)
 
 ##### Enhancements
@@ -12,7 +203,9 @@ To install release candidates run `[sudo] gem install cocoapods --pre`
 
 ##### Bug Fixes
 
-* None.  
+* No master specs cloning when not needed for `pod lib lint`.  
+  [Alfredo Delli Bovi](https://github.com/adellibovi)
+  [#6154](https://github.com/CocoaPods/CocoaPods/issues/6154)
 
 
 ## 1.2.1.rc.1 (2017-04-05)
@@ -154,6 +347,10 @@ To install release candidates run `[sudo] gem install cocoapods --pre`
 * Show git progress when downloading the CocoaPods Specs repo.  
   [Danielle Tomlinson](https://github.com/dantoml)
   [#5937](https://github.com/CocoaPods/CocoaPods/issues/5937)
+
+* Move Installer target verification into the Xcode namespace 
+  [Danielle Tomlinson](https://github.com/DanToml)
+  [#5607](https://github.com/CocoaPods/CocoaPods/pull/5607)
 
 ##### Bug Fixes
 

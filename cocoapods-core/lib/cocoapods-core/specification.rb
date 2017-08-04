@@ -34,13 +34,18 @@ module Pod
     # @param  [String] name
     #         the name of the specification.
     #
-    def initialize(parent = nil, name = nil)
+    # @param [Bool] test_specification
+    #        Whether the specification is a test specification
+    #
+    def initialize(parent = nil, name = nil, test_specification = false)
       @attributes_hash = {}
       @subspecs = []
       @consumers = {}
       @parent = parent
       @hash_value = nil
+      @test_specification = test_specification
       attributes_hash['name'] = name
+      attributes_hash['test_type'] = :unit if test_specification
 
       yield self if block_given?
     end
@@ -53,6 +58,11 @@ module Pod
     # @return [Array<Specification>] The subspecs of the specification.
     #
     attr_accessor :subspecs
+
+    # @return [Bool] If this specification is a test specification.
+    #
+    attr_accessor :test_specification
+    alias_method :test_specification?, :test_specification
 
     # Checks if a specification is equal to the given one according its name
     # and to its version.
@@ -203,7 +213,20 @@ module Pod
 
     # @!group Dependencies & Subspecs
 
-    # @return [Array<Specifications>] the recursive list of all the subspecs of
+    # @return [Symbol] the test type supported if this is a test specification.
+    #
+    def test_type
+      attributes_hash['test_type'].to_sym
+    end
+
+    # @return [Array<Specification>] the list of all the test subspecs of
+    #         a specification.
+    #
+    def test_specs
+      subspecs.select(&:test_specification?)
+    end
+
+    # @return [Array<Specification>] the recursive list of all the subspecs of
     #         a specification.
     #
     def recursive_subspecs
@@ -232,7 +255,7 @@ module Pod
     #
     # @return   [Specification] the subspec with the given name or self.
     #
-    def subspec_by_name(relative_name, raise_if_missing = true)
+    def subspec_by_name(relative_name, raise_if_missing = true, include_test_specifications = false)
       if relative_name.nil? || relative_name == base_name
         self
       elsif relative_name.downcase == base_name.downcase
@@ -241,7 +264,7 @@ module Pod
       else
         remainder = relative_name[base_name.size + 1..-1]
         subspec_name = remainder.split('/').shift
-        subspec = subspecs.find { |s| s.base_name == subspec_name }
+        subspec = subspecs.find { |s| s.base_name == subspec_name && (include_test_specifications || !s.test_specification?) }
         unless subspec
           if raise_if_missing
             raise Informative, 'Unable to find a specification named ' \
@@ -250,7 +273,7 @@ module Pod
             return nil
           end
         end
-        subspec.subspec_by_name(remainder, raise_if_missing)
+        subspec.subspec_by_name(remainder, raise_if_missing, include_test_specifications)
       end
     end
 
@@ -274,7 +297,7 @@ module Pod
     #
     def subspec_dependencies(platform = nil)
       specs = if default_subspecs.empty?
-                subspecs.compact
+                subspecs.compact.reject(&:test_specification?)
               else
                 default_subspecs.map do |subspec_name|
                   root.subspec_by_name("#{name}/#{subspec_name}")
@@ -288,9 +311,8 @@ module Pod
 
     # Returns the dependencies on other Pods or subspecs of other Pods.
     #
-    # @param  [Bool] all_platforms
-    #         whether the dependencies should be returned for all platforms
-    #         instead of the active one.
+    # @param  [Platform] platform
+    #         return only dependencies supported on the given platform.
     #
     # @note   External dependencies are inherited by subspecs
     #
@@ -571,7 +593,7 @@ module Pod
       end
 
       spec.defined_in_file = path
-      spec.subspec_by_name(subspec_name)
+      spec.subspec_by_name(subspec_name, true)
     end
 
     # Sets the path of the `podspec` file used to load the specification.
