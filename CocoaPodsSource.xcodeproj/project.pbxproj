@@ -325,6 +325,7 @@
 		0A39D6601F13896F00FAF835 /* try_settings_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = try_settings_spec.rb; sourceTree = "<group>"; };
 		0A39D6611F13896F00FAF835 /* try_spec.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = try_spec.rb; sourceTree = "<group>"; };
 		0A39D6621F13896F00FAF835 /* spec_helper.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = spec_helper.rb; sourceTree = "<group>"; };
+		0ABC6F2C1F4E73F6002CF83C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -340,6 +341,7 @@
 				0A39D6051F13896F00FAF835 /* cocoapods-stats */,
 				0A39D61E1F13896F00FAF835 /* cocoapods-trunk */,
 				0A39D64A1F13896F00FAF835 /* cocoapods-try */,
+				0ABC6F2C1F4E73F6002CF83C /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
